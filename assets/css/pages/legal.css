@@ -1,0 +1,273 @@
+/* =============================================================================
+   Legal pages (privacy.html, terms.html)
+   A sticky table of contents beside long-form text. Prose styles are scoped
+   to .legal__body so they never leak into components.
+   ============================================================================= */
+
+.page-legal {
+  background: var(--color-surface);
+}
+
+.legal {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-12);
+  padding-bottom: var(--space-20);
+}
+
+@media (max-width: 960px) {
+  .legal {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Heading
+   --------------------------------------------------------------------------- */
+
+.legal-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.legal-heading__title {
+  font-size: clamp(var(--text-2xl), 4.5vw, var(--text-3xl));
+}
+
+.legal-heading__meta {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* Draft notice shown until the documents have been reviewed by a lawyer. */
+.legal-notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 760px;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  background: var(--color-warning-soft);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.legal-notice strong {
+  color: var(--color-warning);
+}
+
+/* ---------------------------------------------------------------------------
+   Table of contents
+   --------------------------------------------------------------------------- */
+
+.legal__toc {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-6));
+  max-height: calc(100vh - var(--header-height) - var(--space-12));
+  overflow-y: auto;
+}
+
+.legal__toc-title {
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.legal__toc ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+}
+
+.legal__toc li {
+  counter-increment: toc;
+}
+
+.legal__toc a {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.legal__toc a::before {
+  content: counter(toc) ".";
+  min-width: 1.6em;
+  color: var(--color-text-muted);
+}
+
+.legal__toc a:hover {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+/* On narrow screens the contents list collapses into a <details>. */
+.legal__toc-details > summary {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .legal__toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .legal__toc-details {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .legal__toc-details > summary {
+    display: list-item;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+  }
+
+  .legal__toc-details[open] > summary {
+    margin-bottom: var(--space-3);
+  }
+
+  .legal__toc-title {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Prose
+   --------------------------------------------------------------------------- */
+
+.legal__body {
+  max-width: 760px;
+  color: var(--color-text-secondary);
+  font-size: var(--text-md);
+  line-height: 1.7;
+}
+
+.legal__body section {
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+.legal__body section + section {
+  margin-top: var(--space-12);
+}
+
+.legal__body h2 {
+  margin-bottom: var(--space-4);
+  color: var(--color-text);
+  font-size: var(--text-xl);
+}
+
+.legal__body h3 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--text-md);
+}
+
+.legal__body p + p,
+.legal__body p + ul,
+.legal__body ul + p,
+.legal__body p + .legal-table,
+.legal__body .legal-table + p {
+  margin-top: var(--space-4);
+}
+
+.legal__body ul {
+  margin: 0;
+  padding-left: var(--space-6);
+}
+
+.legal__body li + li {
+  margin-top: var(--space-2);
+}
+
+.legal__body strong {
+  color: var(--color-text);
+}
+
+/* Text that must stand out under consumer protection laws (disclaimers,
+   liability limits, the arbitration agreement). */
+.legal__caps {
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.legal-callout {
+  margin-block: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+}
+
+/* Summary list at the top of a document */
+.legal-summary {
+  margin-bottom: var(--space-12);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-page);
+}
+
+.legal-summary h2 {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+}
+
+/* ---------------------------------------------------------------------------
+   Tables scroll sideways on small screens instead of squashing.
+   --------------------------------------------------------------------------- */
+
+.legal-table {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.legal-table table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.legal-table th,
+.legal-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-table th {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+.legal-table tr:last-child td {
+  border-bottom: none;
+}
