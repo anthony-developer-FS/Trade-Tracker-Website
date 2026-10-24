@@ -1,0 +1,120 @@
+/* =============================================================================
+   Contact page (contact.html)
+   ============================================================================= */
+
+.page-contact {
+  background: var(--color-page);
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+  gap: var(--space-6);
+  padding-bottom: var(--space-20);
+}
+
+@media (max-width: 900px) {
+  .contact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.contact-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.contact-heading__title {
+  font-size: clamp(var(--text-2xl), 4.5vw, var(--text-3xl));
+}
+
+.contact-heading__lead {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+/* ---------------------------------------------------------------------------
+   Form
+   --------------------------------------------------------------------------- */
+
+.contact-form {
+  --card-padding: clamp(var(--space-5), 4vw, var(--space-8));
+}
+
+.contact-form .textarea {
+  min-height: 180px;
+}
+
+.contact-form__consent {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Spam trap: hidden from people and assistive tech, still visible to bots. */
+.contact-form__trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Result message, revealed by the page script after submitting. */
+.contact-status {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.contact-status[data-state="success"] {
+  background: var(--color-gain-soft);
+  color: var(--color-gain);
+}
+
+.contact-status[data-state="error"] {
+  background: var(--color-loss-soft);
+  color: var(--color-loss);
+}
+
+/* ---------------------------------------------------------------------------
+   Side cards
+   --------------------------------------------------------------------------- */
+
+.contact__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-card__title {
+  font-size: var(--text-md);
+}
+
+.contact-card__text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.contact-card__link {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  word-break: break-word;
+}
