@@ -1,0 +1,23 @@
+/* =============================================================================
+   App layout: wide container, page heading
+   ============================================================================= */
+
+.container--wide {
+  max-width: 1320px;
+}
+
+.page-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.page-heading__title {
+  font-size: clamp(var(--text-2xl), 3.5vw, 2rem);
+}
+
+.page-heading__lead {
+  max-width: 640px;
+  color: var(--color-text-muted);
+}

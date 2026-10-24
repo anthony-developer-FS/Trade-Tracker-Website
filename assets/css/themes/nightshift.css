@@ -1,0 +1,90 @@
+/* =============================================================================
+   Theme: Nightshift (mockup C: deep violet, rounded, friendly)
+   -----------------------------------------------------------------------------
+   Same variables as daylight.css. To try this look, link this file instead of
+   daylight.css in each page's <head>.
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Surfaces */
+  --color-page: #0E0A1F;
+  --color-surface: #171230;
+  --color-surface-muted: #1F1840;
+  --color-surface-sunken: #120E28;
+  --color-border: #2A2350;
+  --color-border-strong: #3A3170;
+  --color-overlay: rgba(5, 3, 15, 0.6);
+
+  /* Text */
+  --color-text: #EEEAFB;
+  --color-text-secondary: #C3BBE3;
+  --color-text-muted: #A49CC7;
+  --color-text-inverse: #0E0A1F;
+
+  /* Brand */
+  --color-primary: #8B6CFF;
+  --color-primary-hover: #A48BFF;
+  --color-primary-soft: #241C4A;
+  --color-on-primary: #0E0A1F;
+  --color-focus: #B9A6FF;
+
+  /* Trading semantics. Gains and losses also differ in lightness and are
+     always paired with a +/- sign, so they never rely on color alone. */
+  --color-gain: #4FD1C5;
+  --color-gain-soft: #123A3A;
+  --color-loss: #FF8FA3;
+  --color-loss-soft: #3D1A2A;
+  --color-warning: #FFD27A;
+  --color-warning-soft: #3A2E16;
+
+  /* Typography */
+  --font-sans: "Sora", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-weight-regular: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --letter-spacing-tight: -0.03em;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-md: 1rem;       /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.75rem;   /* 28px */
+  --text-3xl: 2.25rem;   /* 36px */
+  --text-display: clamp(2.5rem, 6vw, 3.75rem);
+
+  /* Shape */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 41, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 41, 0.08);
+  --shadow-lg: 0 20px 48px rgba(15, 23, 41, 0.14);
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 68px;
+  --control-height: 44px;
+  --transition-fast: 150ms ease;
+}

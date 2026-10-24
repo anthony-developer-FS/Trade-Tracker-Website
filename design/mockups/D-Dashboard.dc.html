@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TradeLab dashboard, Ledger direction</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#111111}a:hover{color:#C43D00}
+</style>
+</helmet>
+<div style="min-height: 1180px; background: #FFFFFF; color: #111111; font-family: 'Space Grotesk', system-ui, sans-serif">
+
+  <header style="border-bottom: 3px solid #111111">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 0 32px; min-height: 72px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="width: 22px; height: 22px; background: #FF4F00"></span>
+        <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.02em">TRADELAB</span>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 28px; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em">
+        <a href="#" style="text-decoration: none; border-bottom: 3px solid #FF4F00; padding: 6px 0">Dashboard</a>
+        <a href="#" style="text-decoration: none; padding: 6px 0; color: #4A4A4A">Trades</a>
+        <a href="#" style="text-decoration: none; padding: 6px 0; color: #4A4A4A">Reports</a>
+        <a href="#" style="text-decoration: none; padding: 6px 0; color: #4A4A4A">Journal</a>
+        <a href="#" style="text-decoration: none; padding: 6px 0; color: #4A4A4A">Import</a>
+      </nav>
+      <button type="button" style="height: 44px; padding: 0 20px; border: 2px solid #111111; background: #111111; color: #FFFFFF; font: 600 14px 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.06em">New trade</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1320px; margin: 0 auto; padding: 36px 32px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 36px">
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A4A4A">OCT 01 — OCT 23, 2026 / ALL ACCOUNTS</span>
+        <h1 style="margin: 0; font-size: 72px; font-weight: 700; letter-spacing: -0.045em; line-height: 0.95">+$12,480.50</h1>
+      </div>
+      <div role="tablist" aria-label="Markets" style="display: flex; flex-wrap: wrap; border: 2px solid #111111">
+        <button type="button" role="tab" aria-selected="true" style="height: 44px; padding: 0 18px; border: none; background: #111111; color: #FFFFFF; font: 600 13px 'Space Grotesk', sans-serif; text-transform: uppercase">All</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 44px; padding: 0 18px; border: none; border-left: 2px solid #111111; background: #FFFFFF; color: #111111; font: 600 13px 'Space Grotesk', sans-serif; text-transform: uppercase">Stocks</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 44px; padding: 0 18px; border: none; border-left: 2px solid #111111; background: #FFFFFF; color: #111111; font: 600 13px 'Space Grotesk', sans-serif; text-transform: uppercase">Options</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 44px; padding: 0 18px; border: none; border-left: 2px solid #111111; background: #FFFFFF; color: #111111; font: 600 13px 'Space Grotesk', sans-serif; text-transform: uppercase">Futures</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 44px; padding: 0 18px; border: none; border-left: 2px solid #111111; background: #FFFFFF; color: #111111; font: 600 13px 'Space Grotesk', sans-serif; text-transform: uppercase">Crypto</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); border-top: 1px solid #111111; border-bottom: 1px solid #111111">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="5">
+        <div style="padding: 18px 20px 18px 0; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A4A4A">{{k.label}}</span>
+          <span style="font-size: 30px; font-weight: 700; letter-spacing: -0.03em; color: {{k.color}}">{{k.value}}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em">Daily net P&amp;L</h2><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A4A4A">17 trading days</span></div>
+      <div style="display: grid; grid-template-columns: repeat(17, minmax(0, 1fr)); gap: 6px; height: 240px; border-bottom: 1px solid #111111">
+        <sc-for list="{{bars}}" as="b" hint-placeholder-count="17">
+          <div style="display: flex; flex-direction: column; height: 240px">
+            <div style="flex: 1 1 0; display: flex; align-items: flex-end"><div style="width: 100%; height: {{b.up}}; background: #111111"></div></div>
+            <div style="flex: 0 0 60px; display: flex; align-items: flex-start; border-top: 1px solid #111111"><div style="width: 100%; height: {{b.down}}; background: #FF4F00"></div></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(17, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{bars}}" as="b" hint-placeholder-count="17"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4A4A4A; text-align: center">{{b.day}}</span></sc-for>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 40px">
+      <section style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column">
+        <h2 style="margin: 0 0 10px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em">By setup</h2>
+        <sc-for list="{{setups}}" as="s" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 1.4fr 0.6fr 0.6fr 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid #111111; font-size: 15px">
+            <span style="font-weight: 600">{{s.name}}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A4A4A">{{s.trades}}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A4A4A">{{s.win}}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; text-align: right; color: {{s.color}}">{{s.pnlText}}</span>
+          </div>
+        </sc-for>
+      </section>
+      <section style="flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px"><h2 style="margin: 0; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em">Recent trades</h2><a href="#" style="font-size: 13px; font-weight: 600">All trades →</a></div>
+        <div style="overflow-x: auto">
+          <div style="min-width: 600px">
+            <sc-for list="{{trades}}" as="t" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 1.6fr 0.8fr 0.6fr 1.6fr 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid #111111; font-size: 15px; align-items: center">
+                <span style="font-weight: 600">{{t.symbol}}</span>
+                <span style="font-size: 13px; color: #4A4A4A">{{t.market}}</span>
+                <span style="font-size: 13px; color: #4A4A4A">{{t.side}}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px">{{t.prices}}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; text-align: right; font-weight: 600; color: {{t.color}}">{{t.pnlText}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const GAIN = '#111111', LOSS = '#C43D00';
+    const money = (n) => (n < 0 ? '-$' : '+$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tone = (n) => (n >= 0 ? GAIN : LOSS);
+
+    const kpis = [
+      { label: 'WIN RATE', value: '58.3%', color: GAIN },
+      { label: 'PROFIT FACTOR', value: '1.92', color: GAIN },
+      { label: 'AVG WIN', value: '$312.40', color: GAIN },
+      { label: 'AVG LOSS', value: '-$227.10', color: LOSS },
+      { label: 'EXPECTANCY', value: '+$86.67', color: GAIN }
+    ];
+
+    const daily = [[1, 420], [2, -180], [5, 960], [6, 310], [7, -540], [8, 1230], [9, 275], [12, -95], [13, 640], [14, -320], [15, 880], [16, 150], [19, -610], [20, 470], [21, 1105], [22, -230], [23, 390]];
+    const bars = daily.map(([d, v]) => ({ day: String(d), up: v > 0 ? Math.round((v / 1230) * 100) + '%' : '0%', down: v < 0 ? Math.round((Math.abs(v) / 610) * 100) + '%' : '0%' }));
+
+    const setupRows = [
+      { name: 'Breakout', pnl: 5840, trades: 38, win: '63%' },
+      { name: 'VWAP fade', pnl: 3920, trades: 27, win: '59%' },
+      { name: 'Earnings drift', pnl: 3270, trades: 12, win: '58%' },
+      { name: 'Opening range', pnl: 2150, trades: 31, win: '55%' },
+      { name: 'Off-plan', pnl: -2700, trades: 36, win: '47%' }
+    ];
+    const setups = setupRows.map((s) => ({ ...s, pnlText: money(s.pnl), color: tone(s.pnl) }));
+
+    const tradeRows = [
+      { symbol: 'ES Dec 26', market: 'Futures', side: 'Short', prices: '5,912.25 → 5,898.50', pnl: 1375 },
+      { symbol: 'BTC-USD', market: 'Crypto', side: 'Long', prices: '68,420 → 69,980', pnl: 780 },
+      { symbol: 'NVDA', market: 'Stocks', side: 'Long', prices: '138.20 → 141.85', pnl: 730 },
+      { symbol: 'TSLA 260P Nov 20', market: 'Options', side: 'Long', prices: '4.20 → 6.05', pnl: 555 },
+      { symbol: 'AAPL', market: 'Stocks', side: 'Short', prices: '229.40 → 231.10', pnl: -170 },
+      { symbol: 'SPY 580C Nov 15', market: 'Options', side: 'Long', prices: '2.10 → 1.45', pnl: -325 }
+    ];
+    const trades = tradeRows.map((t) => ({ ...t, pnlText: money(t.pnl), color: tone(t.pnl) }));
+
+    return { kpis, bars, setups, trades };
+  }
+}
+</script>
+</body>
+</html>

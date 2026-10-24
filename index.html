@@ -1,93 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Journal</title>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeLab · See what's really driving your P&amp;L</title>
+  <meta name="description" content="TradeLab is a trading journal for stocks, options, futures and crypto. Import from your broker and find out which setups pay and which habits cost you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/themes/daylight.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages/landing.css">
+  <script src="assets/js/global.js" defer></script>
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">Testimonials</a>
-            <a href="#">Contact</a>
-        </nav>
-        <h1>Trade Tracker</h1>
-        <p>Your ultimate trading companion.</p>
-        <button>Get Started</button>
-    </header>
+<body class="page-landing">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <section id="features">
-        <h2>Key Features</h2>
-        <div class="feature">
-            <img src="feature1.png" alt="Feature 1">
-            <h3>Import your Trades</h3>
-            <p>Import your trades from various trading platforms or other sources
-                such as Excel.
-            </p>
+  <header class="site-header site-header--transparent" data-elevate-on-scroll>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="TradeLab home">
+        <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="14" r="13" class="brand__mark-bg"></circle>
+          <path d="M8 18l4-5 3 3 5-7" class="brand__mark-line" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        TradeLab
+      </a>
+
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <svg class="nav-toggle__open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="nav-toggle__close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul class="site-nav__links">
+          <li><a class="site-nav__link" href="#features">Features</a></li>
+          <li><a class="site-nav__link" href="#how-it-works">How it works</a></li>
+          <li><a class="site-nav__link" href="#markets">Markets</a></li>
+          <li><a class="site-nav__link" href="#brokers">Brokers</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="#">Log in</a>
+          <a class="btn btn--dark" href="#">Get started</a>
         </div>
-        <div class="feature">
-            <img src="feature2.png" alt="Feature 2">
-            <h3>Profit and Loss Tracking</h3>
-            <p>Track your profits and losses over time.</p>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero ---------------------------------------------------------------->
+    <section class="hero">
+      <div class="container hero__inner">
+        <span class="badge badge--primary hero__badge">Free while we're in early access</span>
+        <h1 class="hero__title">See what's really driving your P&amp;L.</h1>
+        <p class="hero__lead">TradeLab turns your broker history into clear answers: which setups pay, which habits cost you, and how each account and strategy is really doing.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="#">Start for free</a>
+          <a class="btn btn--secondary btn--lg" href="#how-it-works">How it works</a>
         </div>
-        <div class="feature">
-            <img src="feature3.png" alt="Feature 3">
-            <h3>Analyze Your Trades</h3>
-            <p>Examine entries and exits for each trade.</p>
-        </div>
+      </div>
+
+      <div class="container">
+        <figure class="preview" aria-label="Example TradeLab dashboard with sample data">
+          <div class="preview__main card">
+            <div class="stat">
+              <span class="stat__label">Net P&amp;L · sample account</span>
+              <span class="stat__value stat__value--lg text-gain">+$12,480.50</span>
+            </div>
+            <svg class="preview__chart" viewBox="0 0 400 110" preserveAspectRatio="none" role="img" aria-label="Sample equity curve trending upward">
+              <path class="preview__chart-area" d="M0 104 L30 95 L55 99 L85 82 L110 76 L135 86 L165 66 L195 58 L220 63 L250 46 L280 36 L300 41 L330 25 L360 20 L380 16 L400 6 L400 110 L0 110 Z"/>
+              <path class="preview__chart-line" d="M0 104 L30 95 L55 99 L85 82 L110 76 L135 86 L165 66 L195 58 L220 63 L250 46 L280 36 L300 41 L330 25 L360 20 L380 16 L400 6" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <div class="preview__stats">
+            <div class="card stat"><span class="stat__label">Win rate</span><span class="stat__value">58.3%</span></div>
+            <div class="card stat"><span class="stat__label">Profit factor</span><span class="stat__value">1.92</span></div>
+            <div class="card stat"><span class="stat__label">Best setup</span><span class="stat__value preview__word">Breakout</span></div>
+            <div class="card stat"><span class="stat__label">Costliest habit</span><span class="stat__value preview__word text-loss">Off-plan</span></div>
+          </div>
+        </figure>
+      </div>
     </section>
 
-    <section id="testimonials">
-        <h2>What Our Users Say</h2>
-        <div class="testimonial">
-            <p>"Testimonial 1"</p>
-            <h4>- User Name 1</h4>
-        </div>
-        <div class="testimonial">
-            <p>"Testimonial 2"</p>
-            <h4>- User Name 2</h4>
-        </div>
-        <div class="testimonial">
-            <p>"Testimonial 3"</p>
-            <h4>- User Name 3</h4>
-        </div>
+    <!-- Features ------------------------------------------------------------>
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow">Features</span>
+          <h2 class="section__title" id="features-title">Everything you need to understand your trading</h2>
+        </header>
+        <ul class="feature-grid">
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 15V3M7 8l5-5 5 5M4 15v5h16v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3 class="feature__title">Import in seconds</h3>
+            <p class="feature__text">Upload a file from your broker. We detect the format, map the columns and rebuild every trade from its fills. Fix a column once and we remember it.</p>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <h3 class="feature__title">Every market, its own view</h3>
+            <p class="feature__text">Stocks, options, futures and crypto each get their own tab and stats, with contract multipliers handled for you.</p>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h10M4 12h16M4 18h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3 class="feature__title">Lists for each account or strategy</h3>
+            <p class="feature__text">Name your own lists, like "Schwab options" or "Day trades", and filter every chart by them.</p>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V11M10 20V5M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3 class="feature__title">Analytics that explain</h3>
+            <p class="feature__text">Win rate, profit factor, expectancy and R-multiples by setup, tag, weekday and hour, plus an equity curve and P&amp;L calendar.</p>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3h10l4 4v14H5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 11h6M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3 class="feature__title">Journal and tags</h3>
+            <p class="feature__text">Add notes, screenshots and tags like "Chased entry" or "Followed plan" to see which habits help and which hurt.</p>
+          </li>
+          <li class="feature">
+            <span class="feature__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <h3 class="feature__title">Private by default</h3>
+            <p class="feature__text">Your trades are visible only to you. We never ask for your broker password or store full account numbers.</p>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section id="pricing">
-        <h2>Pricing Plans</h2>
-        <div class="plan">
-            <h3>Basic Plan</h3>
-            <p>$X/month</p>
-            <ul>
-                <li>Feature 1</li>
-                <li>Feature 2</li>
+    <!-- How it works -------------------------------------------------------->
+    <section class="section section--muted" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow">How it works</span>
+          <h2 class="section__title" id="how-title">From broker file to better decisions</h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__number">1</span>
+            <h3 class="step__title">Bring in your trades</h3>
+            <p class="step__text">Import a file from your broker or add trades by hand, fill by fill.</p>
+          </li>
+          <li class="step">
+            <span class="step__number">2</span>
+            <h3 class="step__title">Add context</h3>
+            <p class="step__text">Tag the setup you ran, how you felt and whether you followed your plan.</p>
+          </li>
+          <li class="step">
+            <span class="step__number">3</span>
+            <h3 class="step__title">Find your edge</h3>
+            <p class="step__text">See what to repeat and what to drop, across every market and list.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Markets ------------------------------------------------------------->
+    <section class="section" id="markets" aria-labelledby="markets-title">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow">Markets</span>
+          <h2 class="section__title" id="markets-title">Four markets, tracked the right way</h2>
+        </header>
+        <ul class="market-grid">
+          <li class="card market">
+            <h3 class="market__title">Stocks</h3>
+            <p class="market__text">Scale in and out across partial fills, long or short, with fees counted.</p>
+          </li>
+          <li class="card market">
+            <h3 class="market__title">Options</h3>
+            <p class="market__text">Calls and puts by strike and expiration, priced per contract.</p>
+          </li>
+          <li class="card market">
+            <h3 class="market__title">Futures</h3>
+            <p class="market__text">ES, NQ, CL, GC and more, with point values filled in automatically.</p>
+          </li>
+          <li class="card market">
+            <h3 class="market__title">Crypto</h3>
+            <p class="market__text">Fractional sizes and any quote currency, from BTC to altcoins.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Brokers ------------------------------------------------------------->
+    <section class="brokers" id="brokers" aria-labelledby="brokers-title">
+      <div class="container brokers__inner">
+        <h2 class="brokers__title" id="brokers-title">Works with</h2>
+        <ul class="brokers__list">
+          <li>Charles Schwab</li>
+          <li>thinkorswim</li>
+          <li>Fidelity</li>
+          <li>Robinhood</li>
+          <li>Interactive Brokers</li>
+          <li>Webull</li>
+          <li>Tradovate</li>
+          <li>NinjaTrader</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Pricing: hidden while TradeLab is free during early access.
+         Uncomment when paid plans launch. Plan names match the `plans` table.
+    <section class="section section--muted" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__eyebrow">Pricing</span>
+          <h2 class="section__title" id="pricing-title">Simple plans that grow with you</h2>
+        </header>
+        <ul class="pricing-grid">
+          <li class="card plan">
+            <h3 class="plan__name">Free</h3>
+            <p class="plan__price">$0<span class="plan__period">/month</span></p>
+            <ul class="plan__features">
+              <li>[FEATURE]</li>
+              <li>[FEATURE]</li>
             </ul>
-            <button>Sign Up</button>
-        </div>
-        <div class="plan">
-            <h3>Pro Plan</h3>
-            <p>$X/month</p>
-            <ul>
-                <li>Feature 1</li>
-                <li>Feature 2</li>
-                <li>Feature 3</li>
-                <li>Feature 4</li>
+            <a class="btn btn--secondary btn--block" href="#">Get started</a>
+          </li>
+          <li class="card plan plan--featured">
+            <span class="badge badge--primary plan__badge">Most popular</span>
+            <h3 class="plan__name">Basic</h3>
+            <p class="plan__price">[PRICE]<span class="plan__period">/month</span></p>
+            <ul class="plan__features">
+              <li>[FEATURE]</li>
+              <li>[FEATURE]</li>
+              <li>[FEATURE]</li>
             </ul>
-            <button>Sign Up</button>
-        </div>
+            <a class="btn btn--primary btn--block" href="#">Choose Basic</a>
+          </li>
+          <li class="card plan">
+            <h3 class="plan__name">Pro</h3>
+            <p class="plan__price">[PRICE]<span class="plan__period">/month</span></p>
+            <ul class="plan__features">
+              <li>[FEATURE]</li>
+              <li>[FEATURE]</li>
+              <li>[FEATURE]</li>
+              <li>[FEATURE]</li>
+            </ul>
+            <a class="btn btn--secondary btn--block" href="#">Choose Pro</a>
+          </li>
+        </ul>
+      </div>
     </section>
+    -->
 
-    <footer>
-        <p>&copy; 2023 Trade Journal</p>
-        <nav>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
-        </nav>
-    </footer>
+    <!-- Closing call to action ---------------------------------------------->
+    <section class="cta">
+      <div class="container cta__inner">
+        <h2 class="cta__title">Start your trading journal today</h2>
+        <p class="cta__text">Free for everyone during early access. No card needed.</p>
+        <a class="btn btn--primary btn--lg" href="#">Create your free account</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>&copy; <span data-current-year>2026</span> TradeLab</span>
+      <ul class="site-footer__links">
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Terms of service</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>

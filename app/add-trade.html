@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add a trade · TradeLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/themes/daylight.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/pages/add-trade.css">
+  <script src="../assets/js/global.js" defer></script>
+</head>
+<body class="page-app">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- App header ------------------------------------------------------------>
+  <header class="site-header" data-elevate-on-scroll>
+    <div class="container container--wide site-header__inner">
+      <a class="brand" href="../index.html" aria-label="TradeLab home">
+        <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="14" r="13" class="brand__mark-bg"></circle>
+          <path d="M8 18l4-5 3 3 5-7" class="brand__mark-line" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        TradeLab
+      </a>
+
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-controls="app-nav" aria-expanded="false" aria-label="Open menu">
+        <svg class="nav-toggle__open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="nav-toggle__close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <nav class="site-nav" id="app-nav" aria-label="Main">
+        <ul class="site-nav__links">
+          <li><a class="site-nav__link" href="#">Dashboard</a></li>
+          <li><a class="site-nav__link" href="#" aria-current="page">Trades</a></li>
+          <li><a class="site-nav__link" href="#">Reports</a></li>
+          <li><a class="site-nav__link" href="#">Journal</a></li>
+          <li><a class="site-nav__link" href="#">Import</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--primary" href="add-trade.html">Add trade</a>
+          <div class="dropdown" data-dropdown>
+            <button class="avatar-btn" type="button" data-dropdown-trigger aria-expanded="false" aria-controls="account-menu" aria-label="Account menu">JM</button>
+            <div class="dropdown__menu" id="account-menu" data-dropdown-menu hidden>
+              <div class="dropdown__header">
+                <strong>John</strong>
+                <span class="text-muted">Early access</span>
+              </div>
+              <a class="dropdown__item" href="#">Accounts and lists</a>
+              <a class="dropdown__item" href="#">Settings</a>
+              <a class="dropdown__item" href="#">Help</a>
+              <button class="dropdown__item" type="button" data-action="sign-out">Log out</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container container--wide add-trade">
+
+    <div class="page-heading">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="#">Trades</a></li>
+          <li aria-current="page">Add trade</li>
+        </ol>
+      </nav>
+      <h1 class="page-heading__title">Add a trade</h1>
+      <p class="page-heading__lead">Enter each fill. Add more fills to scale in or out, and leave out the exit for a trade that's still open.</p>
+    </div>
+
+    <!--
+      Field names match the database columns (see docs/database/README.md):
+      trades.*, executions.* as fills[n][...], trade_tags, trade_list_items.
+      Market-specific fields are shown with CSS only (:has), no JS needed.
+    -->
+    <form class="trade-form" id="trade-form" novalidate>
+      <div class="trade-form__main">
+
+        <!-- 1. Instrument -------------------------------------------------->
+        <section class="card form-section" aria-labelledby="instrument-title">
+          <header class="form-section__header">
+            <span class="form-section__step" aria-hidden="true">1</span>
+            <div>
+              <h2 class="form-section__title" id="instrument-title">Instrument</h2>
+              <p class="form-section__subtitle">What you traded and where.</p>
+            </div>
+          </header>
+
+          <div class="stack">
+            <fieldset class="fieldset">
+              <legend>Market</legend>
+              <div class="segmented segmented--block market-switch">
+                <input class="segmented__input" type="radio" name="asset_class" id="market-stock" value="stock" checked>
+                <label class="segmented__option" for="market-stock">Stocks</label>
+                <input class="segmented__input" type="radio" name="asset_class" id="market-option" value="option">
+                <label class="segmented__option" for="market-option">Options</label>
+                <input class="segmented__input" type="radio" name="asset_class" id="market-future" value="future">
+                <label class="segmented__option" for="market-future">Futures</label>
+                <input class="segmented__input" type="radio" name="asset_class" id="market-crypto" value="crypto">
+                <label class="segmented__option" for="market-crypto">Crypto</label>
+              </div>
+            </fieldset>
+
+            <div class="form-grid">
+              <div class="field">
+                <label class="field__label" for="symbol">
+                  <span class="market-only market-only--stock">Ticker</span>
+                  <span class="market-only market-only--option">Underlying</span>
+                  <span class="market-only market-only--future">Contract</span>
+                  <span class="market-only market-only--crypto">Pair</span>
+                </label>
+                <input class="input input--mono" type="text" id="symbol" name="symbol" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="AAPL" required>
+                <span class="field__hint market-only market-only--future">Root and month, e.g. ESZ6. Point value is filled in for you.</span>
+                <span class="field__hint market-only market-only--crypto">e.g. BTC-USD or ETH-USDT</span>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="broker-account">Account</label>
+                <select class="select" id="broker-account" name="broker_account_id">
+                  <option value="">No account</option>
+                  <option value="schwab-ira" selected>Charles Schwab · IRA</option>
+                  <option value="fidelity-brokerage">Fidelity · Brokerage</option>
+                  <option value="__new">+ Add an account…</option>
+                </select>
+              </div>
+
+              <fieldset class="fieldset">
+                <legend>Direction</legend>
+                <div class="segmented segmented--block">
+                  <input class="segmented__input" type="radio" name="direction" id="direction-long" value="long" checked>
+                  <label class="segmented__option" for="direction-long">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 11V3M3.5 6.5L7 3l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Long
+                  </label>
+                  <input class="segmented__input" type="radio" name="direction" id="direction-short" value="short">
+                  <label class="segmented__option" for="direction-short">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 3v8M3.5 7.5L7 11l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Short
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <!-- Options only -->
+            <div class="form-grid market-fields market-fields--option">
+              <fieldset class="fieldset">
+                <legend>Type</legend>
+                <div class="segmented segmented--block">
+                  <input class="segmented__input" type="radio" name="option_type" id="option-call" value="call" checked>
+                  <label class="segmented__option" for="option-call">Call</label>
+                  <input class="segmented__input" type="radio" name="option_type" id="option-put" value="put">
+                  <label class="segmented__option" for="option-put">Put</label>
+                </div>
+              </fieldset>
+              <div class="field">
+                <label class="field__label" for="strike">Strike</label>
+                <div class="input-affix">
+                  <span class="input-affix__text" aria-hidden="true">$</span>
+                  <input class="input input--mono" type="number" id="strike" name="strike" inputmode="decimal" step="any" min="0" placeholder="150.00">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="expiration">Expiration</label>
+                <input class="input" type="date" id="expiration" name="expiration_date">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Fills ------------------------------------------------------->
+        <section class="card form-section" aria-labelledby="fills-title">
+          <header class="form-section__header">
+            <span class="form-section__step" aria-hidden="true">2</span>
+            <div>
+              <h2 class="form-section__title" id="fills-title">Fills</h2>
+              <p class="form-section__subtitle">Every buy and sell that made up this trade.</p>
+            </div>
+          </header>
+
+          <div class="fills" data-fills>
+            <div class="fills__head" aria-hidden="true">
+              <span>Side</span>
+              <span>Date and time</span>
+              <span>
+                <span class="market-only market-only--stock">Shares</span>
+                <span class="market-only market-only--option">Contracts</span>
+                <span class="market-only market-only--future">Contracts</span>
+                <span class="market-only market-only--crypto">Amount</span>
+              </span>
+              <span>Price</span>
+              <span>Fees</span>
+              <span></span>
+            </div>
+
+            <ol class="fills__list" data-fills-list>
+              <li class="fill" data-fill>
+                <div class="field fill__side">
+                  <label class="field__label fill__label" for="fill-0-side">Side</label>
+                  <select class="select" id="fill-0-side" name="fills[0][side]">
+                    <option value="buy" selected>Buy</option>
+                    <option value="sell">Sell</option>
+                  </select>
+                </div>
+                <div class="field fill__time">
+                  <label class="field__label fill__label" for="fill-0-time">Date and time</label>
+                  <input class="input" type="datetime-local" id="fill-0-time" name="fills[0][executed_at]" step="1">
+                </div>
+                <div class="field fill__qty">
+                  <label class="field__label fill__label" for="fill-0-qty">Quantity</label>
+                  <input class="input input--mono" type="number" id="fill-0-qty" name="fills[0][quantity]" inputmode="decimal" step="any" min="0" placeholder="100">
+                </div>
+                <div class="field fill__price">
+                  <label class="field__label fill__label" for="fill-0-price">Price</label>
+                  <div class="input-affix">
+                    <span class="input-affix__text" aria-hidden="true">$</span>
+                    <input class="input input--mono" type="number" id="fill-0-price" name="fills[0][price]" inputmode="decimal" step="any" min="0" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="field fill__fees">
+                  <label class="field__label fill__label" for="fill-0-fees">Fees</label>
+                  <div class="input-affix">
+                    <span class="input-affix__text" aria-hidden="true">$</span>
+                    <input class="input input--mono" type="number" id="fill-0-fees" name="fills[0][fees]" inputmode="decimal" step="any" placeholder="0.00">
+                  </div>
+                </div>
+                <button class="icon-btn fill__remove" type="button" data-action="remove-fill" aria-label="Remove fill 1">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </button>
+              </li>
+
+              <li class="fill" data-fill>
+                <div class="field fill__side">
+                  <label class="field__label fill__label" for="fill-1-side">Side</label>
+                  <select class="select" id="fill-1-side" name="fills[1][side]">
+                    <option value="buy">Buy</option>
+                    <option value="sell" selected>Sell</option>
+                  </select>
+                </div>
+                <div class="field fill__time">
+                  <label class="field__label fill__label" for="fill-1-time">Date and time</label>
+                  <input class="input" type="datetime-local" id="fill-1-time" name="fills[1][executed_at]" step="1">
+                </div>
+                <div class="field fill__qty">
+                  <label class="field__label fill__label" for="fill-1-qty">Quantity</label>
+                  <input class="input input--mono" type="number" id="fill-1-qty" name="fills[1][quantity]" inputmode="decimal" step="any" min="0" placeholder="100">
+                </div>
+                <div class="field fill__price">
+                  <label class="field__label fill__label" for="fill-1-price">Price</label>
+                  <div class="input-affix">
+                    <span class="input-affix__text" aria-hidden="true">$</span>
+                    <input class="input input--mono" type="number" id="fill-1-price" name="fills[1][price]" inputmode="decimal" step="any" min="0" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="field fill__fees">
+                  <label class="field__label fill__label" for="fill-1-fees">Fees</label>
+                  <div class="input-affix">
+                    <span class="input-affix__text" aria-hidden="true">$</span>
+                    <input class="input input--mono" type="number" id="fill-1-fees" name="fills[1][fees]" inputmode="decimal" step="any" placeholder="0.00">
+                  </div>
+                </div>
+                <button class="icon-btn fill__remove" type="button" data-action="remove-fill" aria-label="Remove fill 2">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </button>
+              </li>
+            </ol>
+
+            <button class="btn btn--secondary btn--sm fills__add" type="button" data-action="add-fill">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              Add fill
+            </button>
+          </div>
+
+          <!-- Copied by the page script for each new fill. Replace __INDEX__ and __NUMBER__. -->
+          <template id="fill-template">
+            <li class="fill" data-fill>
+              <div class="field fill__side">
+                <label class="field__label fill__label" for="fill-__INDEX__-side">Side</label>
+                <select class="select" id="fill-__INDEX__-side" name="fills[__INDEX__][side]">
+                  <option value="buy">Buy</option>
+                  <option value="sell">Sell</option>
+                </select>
+              </div>
+              <div class="field fill__time">
+                <label class="field__label fill__label" for="fill-__INDEX__-time">Date and time</label>
+                <input class="input" type="datetime-local" id="fill-__INDEX__-time" name="fills[__INDEX__][executed_at]" step="1">
+              </div>
+              <div class="field fill__qty">
+                <label class="field__label fill__label" for="fill-__INDEX__-qty">Quantity</label>
+                <input class="input input--mono" type="number" id="fill-__INDEX__-qty" name="fills[__INDEX__][quantity]" inputmode="decimal" step="any" min="0">
+              </div>
+              <div class="field fill__price">
+                <label class="field__label fill__label" for="fill-__INDEX__-price">Price</label>
+                <div class="input-affix">
+                  <span class="input-affix__text" aria-hidden="true">$</span>
+                  <input class="input input--mono" type="number" id="fill-__INDEX__-price" name="fills[__INDEX__][price]" inputmode="decimal" step="any" min="0" placeholder="0.00">
+                </div>
+              </div>
+              <div class="field fill__fees">
+                <label class="field__label fill__label" for="fill-__INDEX__-fees">Fees</label>
+                <div class="input-affix">
+                  <span class="input-affix__text" aria-hidden="true">$</span>
+                  <input class="input input--mono" type="number" id="fill-__INDEX__-fees" name="fills[__INDEX__][fees]" inputmode="decimal" step="any" placeholder="0.00">
+                </div>
+              </div>
+              <button class="icon-btn fill__remove" type="button" data-action="remove-fill" aria-label="Remove fill __NUMBER__">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </button>
+            </li>
+          </template>
+        </section>
+
+        <!-- 3. Plan and risk ---------------------------------------------->
+        <section class="card form-section" aria-labelledby="risk-title">
+          <header class="form-section__header">
+            <span class="form-section__step" aria-hidden="true">3</span>
+            <div>
+              <h2 class="form-section__title" id="risk-title">Plan and risk <span class="field__optional">(optional)</span></h2>
+              <p class="form-section__subtitle">Add your planned risk to unlock R-multiple stats.</p>
+            </div>
+          </header>
+          <div class="form-grid">
+            <div class="field">
+              <label class="field__label" for="stop-price">Stop price</label>
+              <div class="input-affix">
+                <span class="input-affix__text" aria-hidden="true">$</span>
+                <input class="input input--mono" type="number" id="stop-price" name="stop_price" inputmode="decimal" step="any" placeholder="0.00">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="target-price">Target price</label>
+              <div class="input-affix">
+                <span class="input-affix__text" aria-hidden="true">$</span>
+                <input class="input input--mono" type="number" id="target-price" name="target_price" inputmode="decimal" step="any" placeholder="0.00">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="planned-risk">Planned risk</label>
+              <div class="input-affix">
+                <span class="input-affix__text" aria-hidden="true">$</span>
+                <input class="input input--mono" type="number" id="planned-risk" name="planned_risk" inputmode="decimal" step="any" min="0" placeholder="250.00" aria-describedby="planned-risk-hint">
+              </div>
+              <span class="field__hint" id="planned-risk-hint">Dollars you were willing to lose.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Organize ---------------------------------------------------->
+        <section class="card form-section" aria-labelledby="organize-title">
+          <header class="form-section__header">
+            <span class="form-section__step" aria-hidden="true">4</span>
+            <div>
+              <h2 class="form-section__title" id="organize-title">Organize</h2>
+              <p class="form-section__subtitle">Labels that power your reports.</p>
+            </div>
+          </header>
+          <div class="stack stack--lg">
+            <div class="form-grid">
+              <div class="field">
+                <label class="field__label" for="setup">Setup</label>
+                <select class="select" id="setup" name="setup_id">
+                  <option value="">No setup</option>
+                  <option value="breakout">Breakout</option>
+                  <option value="vwap-fade">VWAP fade</option>
+                  <option value="opening-range">Opening range</option>
+                  <option value="__new">+ New setup…</option>
+                </select>
+              </div>
+              <fieldset class="fieldset">
+                <legend>How well did you execute?</legend>
+                <div class="rating">
+                  <input class="rating__input" type="radio" name="rating" id="rating-5" value="5">
+                  <label class="rating__star" for="rating-5"><span class="visually-hidden">5 stars</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg></label>
+                  <input class="rating__input" type="radio" name="rating" id="rating-4" value="4">
+                  <label class="rating__star" for="rating-4"><span class="visually-hidden">4 stars</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg></label>
+                  <input class="rating__input" type="radio" name="rating" id="rating-3" value="3">
+                  <label class="rating__star" for="rating-3"><span class="visually-hidden">3 stars</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg></label>
+                  <input class="rating__input" type="radio" name="rating" id="rating-2" value="2">
+                  <label class="rating__star" for="rating-2"><span class="visually-hidden">2 stars</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg></label>
+                  <input class="rating__input" type="radio" name="rating" id="rating-1" value="1">
+                  <label class="rating__star" for="rating-1"><span class="visually-hidden">1 star</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg></label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="tag-input">Tags</label>
+              <div class="chip-input" data-chip-input>
+                <span class="chip">Followed plan<button class="chip__remove" type="button" aria-label="Remove tag Followed plan"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3L3 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></span>
+                <input class="chip-input__field" type="text" id="tag-input" placeholder="Add a tag and press Enter" autocomplete="off">
+              </div>
+              <div class="chip-suggestions" aria-label="Suggested tags">
+                <button class="chip-suggestion" type="button">+ Chased entry</button>
+                <button class="chip-suggestion" type="button">+ Moved stop</button>
+                <button class="chip-suggestion" type="button">+ Oversized</button>
+                <button class="chip-suggestion" type="button">+ FOMO</button>
+              </div>
+            </div>
+
+            <fieldset class="fieldset">
+              <legend>Lists</legend>
+              <div class="list-choices">
+                <label class="choice">
+                  <input type="checkbox" name="trade_list_ids[]" value="schwab-options">
+                  <span class="color-dot" style="--dot-color: var(--color-primary)"></span>
+                  Schwab options
+                  <span class="choice__meta">61 trades</span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" name="trade_list_ids[]" value="fidelity-stocks" checked>
+                  <span class="color-dot" style="--dot-color: var(--color-gain)"></span>
+                  Fidelity stocks
+                  <span class="choice__meta">83 trades</span>
+                </label>
+              </div>
+              <p class="field__hint list-choices__hint">2 of 2 lists used. The trade always stays in your full trade log.</p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- 5. Notes and screenshots -------------------------------------->
+        <section class="card form-section" aria-labelledby="notes-title">
+          <header class="form-section__header">
+            <span class="form-section__step" aria-hidden="true">5</span>
+            <div>
+              <h2 class="form-section__title" id="notes-title">Notes and screenshots <span class="field__optional">(optional)</span></h2>
+              <p class="form-section__subtitle">What did you see, and what would you do differently?</p>
+            </div>
+          </header>
+          <div class="stack stack--md">
+            <div class="field">
+              <label class="field__label" for="notes">Notes</label>
+              <textarea class="textarea" id="notes" name="notes" rows="5" placeholder="Why you took it, how you managed it, what you learned."></textarea>
+            </div>
+            <div class="field">
+              <span class="field__label" id="screenshots-label">Chart screenshots</span>
+              <div class="dropzone" data-dropzone>
+                <svg class="dropzone__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 15l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="16" cy="9" r="1.5" fill="currentColor"/></svg>
+                <span><strong>Choose images</strong> or drag them here</span>
+                <span class="field__hint">PNG, JPG or WebP, up to 10 MB each</span>
+                <input class="dropzone__input" type="file" id="screenshots" name="screenshots" accept="image/png,image/jpeg,image/webp,image/gif" multiple aria-labelledby="screenshots-label">
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Summary sidebar. Values are filled in by the page script from the fills. -->
+      <aside class="trade-form__aside" aria-labelledby="summary-title">
+        <div class="card summary" aria-live="polite">
+          <div class="summary__header">
+            <h2 class="summary__title" id="summary-title">Trade summary</h2>
+            <span class="badge" data-summary="status">Draft</span>
+          </div>
+
+          <div class="stat summary__pnl">
+            <span class="stat__label">Net P&amp;L</span>
+            <span class="stat__value stat__value--lg" data-summary="net-pnl">—</span>
+          </div>
+
+          <dl class="summary__list">
+            <div class="summary__row"><dt>Gross P&amp;L</dt><dd data-summary="gross-pnl">—</dd></div>
+            <div class="summary__row"><dt>Fees</dt><dd data-summary="fees">—</dd></div>
+            <div class="summary__row"><dt>Avg entry</dt><dd data-summary="avg-entry">—</dd></div>
+            <div class="summary__row"><dt>Avg exit</dt><dd data-summary="avg-exit">—</dd></div>
+            <div class="summary__row"><dt>Position size</dt><dd data-summary="quantity">—</dd></div>
+            <div class="summary__row"><dt>R-multiple</dt><dd data-summary="r-multiple">—</dd></div>
+            <div class="summary__row"><dt>Hold time</dt><dd data-summary="hold-time">—</dd></div>
+          </dl>
+
+          <p class="summary__note">Final numbers are calculated from your fills when you save.</p>
+
+          <div class="summary__actions">
+            <button class="btn btn--primary btn--lg btn--block" type="submit">Save trade</button>
+            <button class="btn btn--secondary btn--block" type="submit" name="intent" value="save-and-new">Save and add another</button>
+            <a class="btn btn--ghost btn--block" href="#">Cancel</a>
+          </div>
+        </div>
+      </aside>
+    </form>
+  </main>
+</body>
+</html>

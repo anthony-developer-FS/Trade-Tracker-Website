@@ -1,0 +1,90 @@
+/* =============================================================================
+   Theme: Harbor (mockup E: navy, color-blind-safe blue and amber)
+   -----------------------------------------------------------------------------
+   Same variables as daylight.css. To try this look, link this file instead of
+   daylight.css in each page's <head>.
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* Surfaces */
+  --color-page: #0A1628;
+  --color-surface: #102238;
+  --color-surface-muted: #16304F;
+  --color-surface-sunken: #0D1D32;
+  --color-border: #1D3350;
+  --color-border-strong: #2A4468;
+  --color-overlay: rgba(3, 8, 16, 0.6);
+
+  /* Text */
+  --color-text: #E6EEF8;
+  --color-text-secondary: #B8C7DA;
+  --color-text-muted: #93A7C1;
+  --color-text-inverse: #0A1628;
+
+  /* Brand */
+  --color-primary: #6CC4FF;
+  --color-primary-hover: #A8DCFF;
+  --color-primary-soft: #16304F;
+  --color-on-primary: #0A1628;
+  --color-focus: #A8DCFF;
+
+  /* Trading semantics. Gains and losses also differ in lightness and are
+     always paired with a +/- sign, so they never rely on color alone. */
+  --color-gain: #6CC4FF;
+  --color-gain-soft: #14314F;
+  --color-loss: #FFB25B;
+  --color-loss-soft: #3A2A14;
+  --color-warning: #FFD27A;
+  --color-warning-soft: #3A2E16;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-weight-regular: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --letter-spacing-tight: -0.03em;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-md: 1rem;       /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.75rem;   /* 28px */
+  --text-3xl: 2.25rem;   /* 36px */
+  --text-display: clamp(2.5rem, 6vw, 3.75rem);
+
+  /* Shape */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 41, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 41, 0.08);
+  --shadow-lg: 0 20px 48px rgba(15, 23, 41, 0.14);
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 68px;
+  --control-height: 44px;
+  --transition-fast: 150ms ease;
+}

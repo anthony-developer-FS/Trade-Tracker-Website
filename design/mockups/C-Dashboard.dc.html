@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TradeLab dashboard, Nightshift direction</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0A1F}
+a{color:#B9A6FF}a:hover{color:#D9CEFF}
+</style>
+</helmet>
+<div style="min-height: 1180px; background: #0E0A1F; color: #EEEAFB; font-family: 'Sora', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+
+  <aside style="flex: 1 1 240px; max-width: 100%; box-sizing: border-box; padding: 24px 18px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect width="30" height="30" rx="10" fill="#8B6CFF"></rect><path d="M8 19l5-6 4 3 5-7" stroke="#0E0A1F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-weight: 700; font-size: 18px">TradeLab</span>
+    </div>
+    <nav aria-label="Main" style="display: flex; flex-direction: column; gap: 4px; font-size: 14px">
+      <a href="#" style="padding: 12px 14px; border-radius: 14px; background: #241C4A; color: #FFFFFF; text-decoration: none; font-weight: 600">Overview</a>
+      <a href="#" style="padding: 12px 14px; border-radius: 14px; color: #C3BBE3; text-decoration: none">Trades</a>
+      <a href="#" style="padding: 12px 14px; border-radius: 14px; color: #C3BBE3; text-decoration: none">Insights</a>
+      <a href="#" style="padding: 12px 14px; border-radius: 14px; color: #C3BBE3; text-decoration: none">Journal</a>
+      <a href="#" style="padding: 12px 14px; border-radius: 14px; color: #C3BBE3; text-decoration: none">Import</a>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 12px; font-weight: 600; color: #A49CC7; padding: 0 8px">Your lists</span>
+      <a href="#" style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 16px; background: #171230; border: 1px solid #2A2350; text-decoration: none; color: #EEEAFB">
+        <span style="font-size: 14px; font-weight: 600">Schwab options</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #4FD1C5">+$5,120.00</span>
+      </a>
+      <a href="#" style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 16px; background: #171230; border: 1px solid #2A2350; text-decoration: none; color: #EEEAFB">
+        <span style="font-size: 14px; font-weight: 600">Fidelity stocks</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #4FD1C5">+$7,360.50</span>
+      </a>
+    </div>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px 16px; display: flex; flex-direction: column; gap: 20px">
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <h1 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.02em">Overview</h1>
+      <div role="tablist" aria-label="Markets" style="display: flex; flex-wrap: wrap; gap: 6px">
+        <button type="button" role="tab" aria-selected="true" style="height: 40px; padding: 0 18px; border-radius: 999px; border: none; background: #8B6CFF; color: #0E0A1F; font: 600 13px 'Sora', sans-serif">All</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid #2A2350; background: #171230; color: #C3BBE3; font: 500 13px 'Sora', sans-serif">Stocks</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid #2A2350; background: #171230; color: #C3BBE3; font: 500 13px 'Sora', sans-serif">Options</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid #2A2350; background: #171230; color: #C3BBE3; font: 500 13px 'Sora', sans-serif">Futures</button>
+        <button type="button" role="tab" aria-selected="false" style="height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid #2A2350; background: #171230; color: #C3BBE3; font: 500 13px 'Sora', sans-serif">Crypto</button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section style="flex: 1 1 300px; min-width: 0; background: #171230; border: 1px solid #2A2350; border-radius: 24px; padding: 24px; display: flex; align-items: center; gap: 24px">
+        <svg width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Win rate 58.3 percent">
+          <circle cx="64" cy="64" r="52" fill="none" stroke="#2A2350" stroke-width="14"></circle>
+          <circle cx="64" cy="64" r="52" fill="none" stroke="#8B6CFF" stroke-width="14" stroke-linecap="round" stroke-dasharray="190.5 326.7" transform="rotate(-90 64 64)"></circle>
+          <text x="64" y="70" text-anchor="middle" fill="#EEEAFB" font-family="Sora, sans-serif" font-size="22" font-weight="700">58%</text>
+        </svg>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: #A49CC7">Net P&amp;L · October</span>
+          <span style="font-family: 'DM Mono', monospace; font-size: 32px; font-weight: 500; color: #4FD1C5">+$12,480.50</span>
+          <span style="font-size: 13px; color: #A49CC7">84 wins · 60 losses · 144 trades</span>
+        </div>
+      </section>
+      <div style="flex: 1 1 300px; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="3">
+          <div style="background: #171230; border: 1px solid #2A2350; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 8px">
+            <span style="font-size: 12px; color: #A49CC7">{{k.label}}</span>
+            <span style="font-family: 'DM Mono', monospace; font-size: 24px; color: {{k.color}}">{{k.value}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <section style="background: #171230; border: 1px solid #2A2350; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 600">Lists compared</h2>
+        <span style="font-size: 13px; color: #A49CC7">Cumulative net P&amp;L</span>
+      </div>
+      <svg viewBox="0 0 800 220" preserveAspectRatio="none" role="img" aria-label="Fidelity stocks rose to $7,360 and Schwab options to $5,120 over October" style="width: 100%; height: 230px; display: block">
+        <path d="M0 55H800M0 110H800M0 165H800" stroke="#2A2350" stroke-width="1"></path>
+        <path d="{{lineA}}" fill="none" stroke="#4FD1C5" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+        <path d="{{lineB}}" fill="none" stroke="#8B6CFF" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 13px">
+        <span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 4px; border-radius: 2px; background: #4FD1C5"></span>Fidelity stocks · 83 trades · 61% win</span>
+        <span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 4px; border-radius: 2px; background: #8B6CFF"></span>Schwab options · 61 trades · 54% win</span>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section style="flex: 1 1 300px; min-width: 0; background: #171230; border: 1px solid #2A2350; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 600">Tags that cost you</h2>
+        <sc-for list="{{tags}}" as="g" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #1F1840">
+            <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600">{{g.name}}</span><span style="font-size: 12px; color: #A49CC7">{{g.trades}} trades</span></span>
+            <span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #FF8FA3">{{g.pnl}}</span>
+          </div>
+        </sc-for>
+      </section>
+      <section style="flex: 2 1 480px; min-width: 0; background: #171230; border: 1px solid #2A2350; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 17px; font-weight: 600">Recent trades</h2><a href="#" style="font-size: 13px; text-decoration: none">See all</a></div>
+        <div style="overflow-x: auto">
+          <div style="min-width: 560px; display: flex; flex-direction: column">
+            <sc-for list="{{trades}}" as="t" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 1.7fr 1.6fr 1.2fr 1fr; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid #231C45">
+                <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600">{{t.symbol}}</span><span style="font-size: 12px; color: #A49CC7">{{t.market}} · {{t.side}}</span></span>
+                <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #C3BBE3">{{t.prices}}</span>
+                <span style="justify-self: start; font-size: 12px; color: #D9CEFF; background: #241C4A; border-radius: 999px; padding: 4px 10px">{{t.setup}}</span>
+                <span style="text-align: right; font-family: 'DM Mono', monospace; font-size: 14px; color: {{t.color}}">{{t.pnlText}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const GAIN = '#4FD1C5', LOSS = '#FF8FA3';
+    const money = (n) => (n < 0 ? '-$' : '+$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tone = (n) => (n >= 0 ? GAIN : LOSS);
+
+    const kpis = [
+      { label: 'Profit factor', value: '1.92', color: '#EEEAFB' },
+      { label: 'Expectancy', value: '+$86.67', color: GAIN },
+      { label: 'Avg hold', value: '42m', color: '#EEEAFB' }
+    ];
+
+    const fidelity = [0, 240, 150, 610, 820, 560, 1080, 1360, 1220, 1790, 2150, 1980, 2700, 3060, 2840, 3600, 4040, 3870, 4720, 5200, 4920, 5880, 6350, 6080, 6700, 7120, 6890, 7360.5];
+    const schwab = [0, 140, 60, 330, 430, 260, 600, 740, 670, 970, 1170, 1070, 1480, 1660, 1550, 1960, 2200, 2110, 2590, 2850, 2700, 3260, 3520, 3380, 4120, 4470, 4320, 5120];
+    const max = 8000, W = 800, H = 220;
+    const path = (arr) => 'M' + arr.map((v, i) => ((i / (arr.length - 1)) * W).toFixed(1) + ' ' + (H - (v / max) * (H - 10)).toFixed(1)).join(' L');
+
+    const tags = [
+      { name: 'Chased entry', trades: 14, pnl: '-$1,240.00' },
+      { name: 'Moved stop', trades: 9, pnl: '-$980.00' },
+      { name: 'Revenge trade', trades: 7, pnl: '-$310.00' },
+      { name: 'Oversized', trades: 6, pnl: '-$170.00' }
+    ];
+
+    const tradeRows = [
+      { symbol: 'ES Dec 26', market: 'Futures', side: 'Short', prices: '5,912.25 → 5,898.50', setup: 'VWAP fade', pnl: 1375 },
+      { symbol: 'BTC-USD', market: 'Crypto', side: 'Long', prices: '68,420 → 69,980', setup: 'Breakout', pnl: 780 },
+      { symbol: 'NVDA', market: 'Stocks', side: 'Long', prices: '138.20 → 141.85', setup: 'Breakout', pnl: 730 },
+      { symbol: 'TSLA 260P Nov 20', market: 'Options', side: 'Long', prices: '4.20 → 6.05', setup: 'Earnings drift', pnl: 555 },
+      { symbol: 'AAPL', market: 'Stocks', side: 'Short', prices: '229.40 → 231.10', setup: 'Off-plan', pnl: -170 },
+      { symbol: 'SPY 580C Nov 15', market: 'Options', side: 'Long', prices: '2.10 → 1.45', setup: 'Opening range', pnl: -325 }
+    ];
+    const trades = tradeRows.map((t) => ({ ...t, pnlText: money(t.pnl), color: tone(t.pnl) }));
+
+    return { kpis, lineA: path(fidelity), lineB: path(schwab), tags, trades };
+  }
+}
+</script>
+</body>
+</html>

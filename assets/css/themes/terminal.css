@@ -1,0 +1,90 @@
+/* =============================================================================
+   Theme: Terminal (mockup A: dark, dense, pro-trader)
+   -----------------------------------------------------------------------------
+   Same variables as daylight.css. To try this look, link this file instead of
+   daylight.css in each page's <head>.
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* Surfaces */
+  --color-page: #0B0D10;
+  --color-surface: #13161B;
+  --color-surface-muted: #1A1E24;
+  --color-surface-sunken: #0E1014;
+  --color-border: #1E2228;
+  --color-border-strong: #2A3038;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+
+  /* Text */
+  --color-text: #E8EAED;
+  --color-text-secondary: #D7DCE3;
+  --color-text-muted: #8B93A1;
+  --color-text-inverse: #0B0D10;
+
+  /* Brand */
+  --color-primary: #C6F432;
+  --color-primary-hover: #D8FF66;
+  --color-primary-soft: #26300F;
+  --color-on-primary: #0B0D10;
+  --color-focus: #C6F432;
+
+  /* Trading semantics. Gains and losses also differ in lightness and are
+     always paired with a +/- sign, so they never rely on color alone. */
+  --color-gain: #C6F432;
+  --color-gain-soft: #26300F;
+  --color-loss: #FF7A59;
+  --color-loss-soft: #3A1D16;
+  --color-warning: #FFC857;
+  --color-warning-soft: #3A2E12;
+
+  /* Typography */
+  --font-sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-weight-regular: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --letter-spacing-tight: -0.03em;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-md: 1rem;       /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.75rem;   /* 28px */
+  --text-3xl: 2.25rem;   /* 36px */
+  --text-display: clamp(2.5rem, 6vw, 3.75rem);
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 41, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 41, 0.08);
+  --shadow-lg: 0 20px 48px rgba(15, 23, 41, 0.14);
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 68px;
+  --control-height: 44px;
+  --transition-fast: 150ms ease;
+}
