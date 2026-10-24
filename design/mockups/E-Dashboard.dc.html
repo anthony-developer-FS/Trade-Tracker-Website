@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TradeLab dashboard, Harbor direction</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A1628}
+a{color:#6CC4FF}a:hover{color:#A8DCFF}
+</style>
+</helmet>
+<div style="min-height: 1180px; background: #0A1628; color: #E6EEF8; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-wrap: wrap">
+
+  <aside style="flex: 0 0 80px; box-sizing: border-box; padding: 20px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; border-right: 1px solid #1D3350">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true" style="margin-bottom: 18px"><rect width="36" height="36" rx="10" fill="#6CC4FF"></rect><path d="M9 23l6-7 5 4 7-9" stroke="#0A1628" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <a href="#" aria-label="Dashboard" style="width: 48px; height: 48px; border-radius: 14px; background: #16304F; color: #6CC4FF; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2h5v5H2zM9 2h5v3H9zM9 7h5v7H9zM2 9h5v5H2z" stroke="currentColor" stroke-width="1.4"></path></svg></a>
+    <a href="#" aria-label="Trades" style="width: 48px; height: 48px; border-radius: 14px; color: #93A7C1; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></a>
+    <a href="#" aria-label="Reports" style="width: 48px; height: 48px; border-radius: 14px; color: #93A7C1; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 14V8M6 14V4M10 14V9M14 14V2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></a>
+    <a href="#" aria-label="Journal" style="width: 48px; height: 48px; border-radius: 14px; color: #93A7C1; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h8l2 2v10H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path><path d="M5.5 7h5M5.5 10h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></a>
+    <a href="#" aria-label="Import trades" style="width: 48px; height: 48px; border-radius: 14px; color: #93A7C1; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 10V2M5 5l3-3 3 3M2 10v4h12v-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em">Performance</h1>
+        <span style="font-size: 13px; color: #93A7C1">October 2026 · All lists · All accounts</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <button type="button" style="height: 42px; padding: 0 16px; border-radius: 12px; border: 1px solid #1D3350; background: #102238; color: #E6EEF8; font: 600 13px 'Plus Jakarta Sans', sans-serif">Filters</button>
+        <button type="button" style="height: 42px; padding: 0 18px; border-radius: 12px; border: none; background: #6CC4FF; color: #0A1628; font: 700 13px 'Plus Jakarta Sans', sans-serif">Add trade</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+      <sc-for list="{{markets}}" as="m" hint-placeholder-count="4">
+        <a href="#" style="background: #102238; border: 1px solid #1D3350; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #E6EEF8">
+          <span style="display: flex; justify-content: space-between; font-size: 13px; color: #93A7C1"><span style="font-weight: 700; color: #E6EEF8">{{m.name}}</span><span>{{m.trades}} trades</span></span>
+          <span style="font-size: 24px; font-weight: 800; color: {{m.color}}">{{m.pnlText}}</span>
+          <span style="height: 6px; border-radius: 3px; background: #1D3350; overflow: hidden"><span style="display: block; height: 6px; border-radius: 3px; width: {{m.w}}; background: #6CC4FF"></span></span>
+          <span style="font-size: 12px; color: #93A7C1">{{m.win}} win rate</span>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 14px">
+      <section style="flex: 2 1 480px; min-width: 0; background: #102238; border: 1px solid #1D3350; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 700">Equity curve</h2>
+          <div style="display: flex; gap: 20px; font-size: 13px; color: #93A7C1"><span>Net <strong style="color: #6CC4FF">+$12,480.50</strong></span><span>Win rate <strong style="color: #E6EEF8">58.3%</strong></span><span>PF <strong style="color: #E6EEF8">1.92</strong></span></div>
+        </div>
+        <svg viewBox="0 0 800 220" preserveAspectRatio="none" role="img" aria-label="Cumulative net P&amp;L rising from $0 to $12,480 over October" style="width: 100%; height: 240px; display: block">
+          <path d="M0 55H800M0 110H800M0 165H800" stroke="#1D3350" stroke-width="1"></path>
+          <path d="{{equityArea}}" fill="#6CC4FF" fill-opacity="0.12"></path>
+          <path d="{{equityLine}}" fill="none" stroke="#6CC4FF" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+        </svg>
+      </section>
+      <section style="flex: 1 1 300px; min-width: 0; background: #102238; border: 1px solid #1D3350; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 700">By hour of entry</h2>
+        <sc-for list="{{hours}}" as="h" hint-placeholder-count="7">
+          <div style="display: grid; grid-template-columns: 48px minmax(0, 1fr) 72px; gap: 10px; align-items: center; font-size: 12px">
+            <span style="color: #93A7C1">{{h.label}}</span>
+            <span style="display: flex; justify-content: {{h.justify}}; height: 14px; background: #0D1D32; border-radius: 4px"><span style="display: block; height: 14px; border-radius: 4px; width: {{h.w}}; background: {{h.color}}"></span></span>
+            <span style="text-align: right; font-weight: 700; color: {{h.color}}">{{h.text}}</span>
+          </div>
+        </sc-for>
+        <div style="display: flex; gap: 16px; font-size: 12px; color: #93A7C1; margin-top: 4px"><span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #6CC4FF"></span>Gain</span><span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #FFB25B"></span>Loss</span></div>
+      </section>
+    </div>
+
+    <section style="background: #102238; border: 1px solid #1D3350; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 6px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 15px; font-weight: 700">Recent trades</h2><a href="#" style="font-size: 13px; font-weight: 600; text-decoration: none">Trade log</a></div>
+      <div style="overflow-x: auto">
+        <div style="min-width: 640px">
+          <sc-for list="{{trades}}" as="t" hint-placeholder-count="6">
+            <div style="display: grid; grid-template-columns: 1.6fr 0.9fr 0.7fr 1.6fr 1.1fr 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid #1D3350; font-size: 13px; align-items: center">
+              <span style="font-weight: 700">{{t.symbol}}</span>
+              <span style="color: #93A7C1">{{t.market}}</span>
+              <span style="color: #93A7C1">{{t.side}}</span>
+              <span>{{t.prices}}</span>
+              <span style="color: #93A7C1">{{t.setup}}</span>
+              <span style="text-align: right; font-weight: 800; color: {{t.color}}">{{t.pnlText}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const GAIN = '#6CC4FF', LOSS = '#FFB25B';
+    const money = (n) => (n < 0 ? '-$' : '+$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tone = (n) => (n >= 0 ? GAIN : LOSS);
+
+    const marketRows = [
+      { name: 'Stocks', trades: 52, pnl: 4860, win: '62%' },
+      { name: 'Options', trades: 49, pnl: 2310, win: '53%' },
+      { name: 'Futures', trades: 28, pnl: 4150, win: '61%' },
+      { name: 'Crypto', trades: 15, pnl: 1160.5, win: '53%' }
+    ];
+    const markets = marketRows.map((m) => ({ ...m, pnlText: money(m.pnl), color: tone(m.pnl), w: Math.round((m.pnl / 4860) * 100) + '%' }));
+
+    const curve = [0, 380, 210, 940, 1250, 820, 1680, 2100, 1890, 2760, 3320, 3050, 4180, 4720, 4390, 5560, 6240, 5980, 7310, 8050, 7620, 9140, 9870, 9460, 10820, 11590, 11210, 12480];
+    const max = 13000, W = 800, H = 220;
+    const pts = curve.map((v, i) => [(i / (curve.length - 1)) * W, H - (v / max) * (H - 10)]);
+    const equityLine = 'M' + pts.map((p) => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L');
+    const equityArea = equityLine + ' L' + W + ' ' + H + ' L0 ' + H + ' Z';
+
+    const hourRows = [['9:30', 3920], ['10:00', 4610], ['11:00', 1240], ['12:00', -880], ['13:00', -410], ['14:00', 1370], ['15:00', 2630]];
+    const hours = hourRows.map(([label, v]) => ({ label, text: (v < 0 ? '-$' : '+$') + (Math.abs(v) / 1000).toFixed(1) + 'k', color: tone(v), w: Math.max(4, Math.round((Math.abs(v) / 4610) * 100)) + '%', justify: v < 0 ? 'flex-end' : 'flex-start' }));
+
+    const tradeRows = [
+      { symbol: 'ES Dec 26', market: 'Futures', side: 'Short', prices: '5,912.25 → 5,898.50', setup: 'VWAP fade', pnl: 1375 },
+      { symbol: 'BTC-USD', market: 'Crypto', side: 'Long', prices: '68,420 → 69,980', setup: 'Breakout', pnl: 780 },
+      { symbol: 'NVDA', market: 'Stocks', side: 'Long', prices: '138.20 → 141.85', setup: 'Breakout', pnl: 730 },
+      { symbol: 'TSLA 260P Nov 20', market: 'Options', side: 'Long', prices: '4.20 → 6.05', setup: 'Earnings drift', pnl: 555 },
+      { symbol: 'AAPL', market: 'Stocks', side: 'Short', prices: '229.40 → 231.10', setup: 'Off-plan', pnl: -170 },
+      { symbol: 'SPY 580C Nov 15', market: 'Options', side: 'Long', prices: '2.10 → 1.45', setup: 'Opening range', pnl: -325 }
+    ];
+    const trades = tradeRows.map((t) => ({ ...t, pnlText: money(t.pnl), color: tone(t.pnl) }));
+
+    return { markets, equityLine, equityArea, hours, trades };
+  }
+}
+</script>
+</body>
+</html>

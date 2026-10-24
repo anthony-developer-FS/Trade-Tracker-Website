@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TradeLab landing page, Ledger direction</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#111111}a:hover{color:#C43D00}
+</style>
+</helmet>
+<div style="min-height: 960px; background: #FFFFFF; color: #111111; font-family: 'Space Grotesk', system-ui, sans-serif">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0; border-bottom: 3px solid #111111">
+      <div style="display: flex; align-items: center; gap: 12px"><span style="width: 22px; height: 22px; background: #FF4F00"></span><span style="font-weight: 700; font-size: 20px">TRADELAB</span></div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em">
+        <a href="#features" style="text-decoration: none">Features</a>
+        <a href="#brokers" style="text-decoration: none">Brokers</a>
+        <a href="#" style="text-decoration: none">Log in</a>
+        <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; background: #FF4F00; color: #111111; text-decoration: none">Start free</a>
+      </nav>
+    </header>
+
+    <section style="display: flex; flex-wrap: wrap; gap: 40px; padding: 64px 0 48px; border-bottom: 1px solid #111111">
+      <h1 style="flex: 2 1 560px; margin: 0; font-size: 96px; line-height: 0.92; font-weight: 700; letter-spacing: -0.05em">Every trade.<br>Every number.<br><span style="color: #C43D00">No guessing.</span></h1>
+      <div style="flex: 1 1 300px; display: flex; flex-direction: column; justify-content: flex-end; gap: 24px">
+        <p style="margin: 0; font-size: 19px; line-height: 1.55">A precise trading journal for stocks, options, futures and crypto. Import from your broker and see exactly what makes and loses you money.</p>
+        <a href="#" style="align-self: flex-start; display: inline-flex; align-items: center; height: 56px; padding: 0 28px; background: #111111; color: #FFFFFF; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none">Start free →</a>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A4A4A">FREE DURING EARLY ACCESS</span>
+      </div>
+    </section>
+
+    <section id="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
+      <div style="padding: 28px 28px 32px 0; border-bottom: 1px solid #111111; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #C43D00">01</span>
+        <h2 style="margin: 0; font-size: 22px; font-weight: 700">Import any broker file</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #333333">Formats detected automatically. Columns mapped once, remembered forever.</p>
+      </div>
+      <div style="padding: 28px 28px 32px 0; border-bottom: 1px solid #111111; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #C43D00">02</span>
+        <h2 style="margin: 0; font-size: 22px; font-weight: 700">Four markets, separated</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #333333">Stocks, options, futures and crypto each get their own tab and analytics.</p>
+      </div>
+      <div style="padding: 28px 28px 32px 0; border-bottom: 1px solid #111111; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #C43D00">03</span>
+        <h2 style="margin: 0; font-size: 22px; font-weight: 700">Lists you name</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #333333">Track accounts or strategies separately and compare them on every chart.</p>
+      </div>
+    </section>
+
+    <section id="brokers" style="padding: 28px 0 48px; display: flex; flex-wrap: wrap; gap: 12px 32px; font-size: 15px; font-weight: 600">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 400; color: #4A4A4A">IMPORTS FROM</span>
+      <span>Charles Schwab</span><span>thinkorswim</span><span>Fidelity</span><span>Robinhood</span><span>Interactive Brokers</span><span>Webull</span><span>Tradovate</span><span>NinjaTrader</span>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

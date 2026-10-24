@@ -1,0 +1,379 @@
+/* =============================================================================
+   Landing page (index.html)
+   ============================================================================= */
+
+.page-landing {
+  background: var(--color-surface);
+}
+
+/* ---------------------------------------------------------------------------
+   Sections
+   --------------------------------------------------------------------------- */
+
+.section {
+  padding-block: clamp(var(--space-16), 9vw, 6.5rem);
+}
+
+.section--muted {
+  background: var(--color-page);
+}
+
+.section__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 720px;
+  margin-bottom: var(--space-12);
+}
+
+.section__eyebrow {
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-heavy);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section__title {
+  font-size: clamp(var(--text-2xl), 4vw, 2.5rem);
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------------- */
+
+.hero {
+  padding-top: clamp(var(--space-12), 8vw, var(--space-20));
+  padding-bottom: var(--space-12);
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+  text-align: center;
+}
+
+.hero__badge {
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-4);
+}
+
+.hero__title {
+  max-width: 820px;
+  font-size: var(--text-display);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.hero__lead {
+  max-width: 620px;
+  color: var(--color-text-muted);
+  font-size: clamp(var(--text-md), 2vw, 1.1875rem);
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+/* Product preview under the hero */
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-page);
+}
+
+.preview__main {
+  display: flex;
+  flex: 2 1 420px;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  border: none;
+}
+
+.preview__chart {
+  width: 100%;
+  height: 140px;
+  margin-top: var(--space-2);
+}
+
+.preview__chart-area {
+  fill: var(--color-primary);
+  fill-opacity: 0.07;
+}
+
+.preview__chart-line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+.preview__stats {
+  display: grid;
+  flex: 1 1 260px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.preview__stats .card {
+  --card-padding: var(--space-5);
+  border: none;
+  justify-content: center;
+}
+
+.preview__word {
+  font-size: var(--text-lg);
+}
+
+/* ---------------------------------------------------------------------------
+   Features
+   --------------------------------------------------------------------------- */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-10) var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.feature__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.feature__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.feature__title {
+  font-size: var(--text-xl);
+}
+
+.feature__text {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------------------
+   How it works
+   --------------------------------------------------------------------------- */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.step__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-heavy);
+}
+
+.step__title {
+  font-size: var(--text-xl);
+}
+
+.step__text {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------------------
+   Markets
+   --------------------------------------------------------------------------- */
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.market {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.market__title {
+  font-size: var(--text-xl);
+}
+
+.market__text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------------------
+   Brokers
+   --------------------------------------------------------------------------- */
+
+.brokers {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.brokers__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4) var(--space-8);
+  padding-block: var(--space-8);
+}
+
+.brokers__title {
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0;
+}
+
+.brokers__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ---------------------------------------------------------------------------
+   Pricing (section is commented out in index.html until paid plans launch)
+   --------------------------------------------------------------------------- */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.plan--featured {
+  border: 2px solid var(--color-primary);
+}
+
+.plan__badge {
+  position: absolute;
+  top: calc(var(--space-3) * -1);
+  left: var(--space-6);
+}
+
+.plan__name {
+  font-size: var(--text-xl);
+}
+
+.plan__price {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-heavy);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.plan__period {
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0;
+}
+
+.plan__features {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0 0 var(--space-4);
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* ---------------------------------------------------------------------------
+   Closing call to action
+   --------------------------------------------------------------------------- */
+
+.cta {
+  padding-block: clamp(var(--space-16), 9vw, 6.5rem);
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: clamp(var(--space-10), 6vw, var(--space-16)) var(--container-gutter);
+  border-radius: var(--radius-xl);
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  text-align: center;
+}
+
+.cta__title {
+  font-size: clamp(var(--text-2xl), 4vw, 2.5rem);
+}
+
+.cta__text {
+  margin-bottom: var(--space-2);
+  opacity: 0.8;
+}

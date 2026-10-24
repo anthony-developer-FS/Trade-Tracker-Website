@@ -1,0 +1,90 @@
+/* =============================================================================
+   Theme: Ledger (mockup D: Swiss print, black ink, signal orange)
+   -----------------------------------------------------------------------------
+   Same variables as daylight.css. To try this look, link this file instead of
+   daylight.css in each page's <head>.
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* Surfaces */
+  --color-page: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F2F2F2;
+  --color-surface-sunken: #F7F7F7;
+  --color-border: #111111;
+  --color-border-strong: #111111;
+  --color-overlay: rgba(17, 17, 17, 0.5);
+
+  /* Text */
+  --color-text: #111111;
+  --color-text-secondary: #333333;
+  --color-text-muted: #4A4A4A;
+  --color-text-inverse: #FFFFFF;
+
+  /* Brand */
+  --color-primary: #111111;
+  --color-primary-hover: #333333;
+  --color-primary-soft: #F2F2F2;
+  --color-on-primary: #FFFFFF;
+  --color-focus: #FF4F00;
+
+  /* Trading semantics. Gains and losses also differ in lightness and are
+     always paired with a +/- sign, so they never rely on color alone. */
+  --color-gain: #111111;
+  --color-gain-soft: #F2F2F2;
+  --color-loss: #C43D00;
+  --color-loss-soft: #FFE6DA;
+  --color-warning: #8A5A00;
+  --color-warning-soft: #FFF1D6;
+
+  /* Typography */
+  --font-sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-weight-regular: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --letter-spacing-tight: -0.03em;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-md: 1rem;       /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.75rem;   /* 28px */
+  --text-3xl: 2.25rem;   /* 36px */
+  --text-display: clamp(2.5rem, 6vw, 3.75rem);
+
+  /* Shape */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-pill: 0;
+
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: 0 0 0 2px #111111;
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 68px;
+  --control-height: 44px;
+  --transition-fast: 150ms ease;
+}
