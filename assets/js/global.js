@@ -1,12 +1,17 @@
 /**
  * TradeLab global UI behavior, loaded on every page.
  *
- * Only shared interface behavior lives here: the mobile menu, dropdown menus,
- * the header shadow and small helpers. Page features (forms, charts, data)
+ * Only shared interface behavior lives here: night mode, the mobile menu,
+ * dropdown menus, the header shadow and small helpers. Page features (forms, charts, data)
  * belong in their own files under assets/js/pages/, and data access in its
  * own module, so this file never needs to know about trades.
  *
+ * Load it in <head> without defer so the saved theme is set before the page
+ * paints (no light flash in night mode). Everything else waits for the DOM.
+ *
  * Markup hooks (see assets/css/components/navigation.css):
+ *   <html data-theme-lock="light">  page that ignores night mode (landing)
+ *   [data-theme-toggle]        night mode button (aria-pressed = dark is on)
  *   [data-nav-toggle]          button with aria-controls="<nav id>"
  *   [data-dropdown]            wrapper with [data-dropdown-trigger] and
  *                              [data-dropdown-menu] inside
@@ -19,6 +24,74 @@
 
   // Must match the max-width breakpoint in navigation.css.
   var MOBILE_NAV_QUERY = window.matchMedia('(max-width: 860px)');
+  var DARK_SCHEME_QUERY = window.matchMedia('(prefers-color-scheme: dark)');
+  var THEME_STORAGE_KEY = 'tradelab-theme';
+  var root = document.documentElement;
+
+  /* ---------------------------------------------------------------------------
+   * Night mode
+   * The theme is <html data-theme="light|dark">; the dark color tokens live in
+   * the theme file. A saved choice wins, otherwise the system setting is used.
+   * ------------------------------------------------------------------------- */
+
+  function savedTheme() {
+    try {
+      var theme = window.localStorage.getItem(THEME_STORAGE_KEY);
+      return theme === 'light' || theme === 'dark' ? theme : null;
+    } catch (error) {
+      return null; // storage blocked (private mode, strict settings)
+    }
+  }
+
+  function saveTheme(theme) {
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch (error) {
+      // The choice still applies to this page; it just won't be remembered.
+    }
+  }
+
+  function currentTheme() {
+    return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    if (root.hasAttribute('data-theme-lock')) {
+      theme = root.getAttribute('data-theme-lock');
+    }
+    root.setAttribute('data-theme', theme);
+    document.querySelectorAll('[data-theme-toggle]').forEach(function (toggle) {
+      toggle.setAttribute('aria-pressed', String(theme === 'dark'));
+    });
+  }
+
+  function setTheme(theme) {
+    saveTheme(theme);
+    applyTheme(theme);
+  }
+
+  // Runs immediately (not on DOMContentLoaded) so there is no flash.
+  applyTheme(savedTheme() || (DARK_SCHEME_QUERY.matches ? 'dark' : 'light'));
+
+  function initThemeToggles() {
+    applyTheme(currentTheme()); // sync aria-pressed now that buttons exist
+
+    document.querySelectorAll('[data-theme-toggle]').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+      });
+    });
+
+    // Follow the system setting until the visitor picks a theme themselves.
+    DARK_SCHEME_QUERY.addEventListener('change', function (event) {
+      if (!savedTheme()) applyTheme(event.matches ? 'dark' : 'light');
+    });
+
+    // Keep other open tabs in step.
+    window.addEventListener('storage', function (event) {
+      if (event.key === THEME_STORAGE_KEY && savedTheme()) applyTheme(savedTheme());
+    });
+  }
 
   /* ---------------------------------------------------------------------------
    * Mobile navigation
@@ -205,6 +278,7 @@
   }
 
   function init() {
+    initThemeToggles();
     initNavToggles();
     initDropdowns();
     initEscapeKey();
@@ -213,13 +287,16 @@
     initCurrentYear();
   }
 
-  // Shared API for page scripts, e.g. TradeLab.ui.closeMenus() before a modal opens.
+  // Shared API for page scripts, e.g. TradeLab.ui.closeMenus() before a modal
+  // opens, or TradeLab.ui.setTheme('dark') from a settings page.
   window.TradeLab = window.TradeLab || {};
   window.TradeLab.ui = {
     closeMenus: function () {
       closeAllDropdowns(null);
       closeAllNavs(false);
-    }
+    },
+    getTheme: currentTheme,
+    setTheme: setTheme
   };
 
   if (document.readyState === 'loading') {
