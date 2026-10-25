@@ -120,6 +120,15 @@ begin
   insert into public.trade_list_items (trade_list_id, trade_id)
     select v_list1, id from public.trades where asset_class = 'option';
 
+  -- Trade log view: flattened symbol, tags and lists for the trade log page.
+  insert into public.tags (name) values ('Followed plan');
+  insert into public.trade_tags (trade_id, tag_id)
+    select t.id, g.id from public.trades t, public.tags g where t.asset_class = 'future';
+  assert (select count(*) from public.trade_log) = (select count(*) from public.trades), 'one log row per trade';
+  assert (select count(*) from public.trade_log where trade_list_ids @> array[v_list1]) = 1, 'log list filter';
+  assert (select count(*) from public.trade_log where search_text like '%followed plan%') = 1, 'log search by tag';
+  assert (select symbol from public.trade_log where asset_class = 'future') = 'ESZ6', 'log symbol';
+
   -- Analytics
   select * into v_stats from public.get_trade_stats();
   assert v_stats.trade_count = 3, 'three closed trades';
@@ -166,6 +175,7 @@ declare
   v_list uuid;
 begin
   assert (select count(*) from public.trades) = 0, 'trades are private';
+  assert (select count(*) from public.trade_log) = 0, 'trade log is private';
   assert (select count(*) from public.trade_lists) = 0, 'lists are private';
   assert (select count(*) from public.profiles) = 1, 'profiles are private';
   assert (select trade_count from public.get_trade_stats()) = 0, 'stats are private';

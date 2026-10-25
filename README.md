@@ -30,6 +30,7 @@ assets/
     pages/                    One script per page (to come)
 design/mockups/               The five design directions
 docs/database/                Database schema docs
+docs/features/                Feature specs and build order (start with mvp-trade-pages.md)
 supabase/                     Migrations and tests
 ```
 

@@ -11,6 +11,7 @@ Postgres on Supabase. The schema lives in `supabase/migrations/` and is applied 
 | `..._security.sql` | Row level security and column privileges |
 | `..._storage.sql` | Private storage buckets for screenshots and uploaded broker files |
 | `..._analytics.sql` | Stats, daily P&L / equity curve, performance breakdowns |
+| `..._trade_log_view.sql` | `trade_log` view: one flat row per trade (symbol, setup, tags, lists) for the trade log page |
 
 ## Diagram
 
