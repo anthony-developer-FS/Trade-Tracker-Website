@@ -13,8 +13,12 @@
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/pages/add-trade.css">
   <script src="../assets/js/global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+  <script src="../assets/js/config.js" defer></script>
+  <script src="../assets/js/lib/supabase.js" defer></script>
+  <script src="../assets/js/lib/auth.js" defer></script>
 </head>
-<body class="page-app">
+<body class="page-app" data-auth="required">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- App header ------------------------------------------------------------>
@@ -49,10 +53,10 @@
         <div class="site-nav__actions">
           <a class="btn btn--primary" href="add-trade.html">Add trade</a>
           <div class="dropdown" data-dropdown>
-            <button class="avatar-btn" type="button" data-dropdown-trigger aria-expanded="false" aria-controls="account-menu" aria-label="Account menu">JM</button>
+            <button class="avatar-btn" type="button" data-dropdown-trigger aria-expanded="false" aria-controls="account-menu" aria-label="Account menu" data-user-initials>JM</button>
             <div class="dropdown__menu" id="account-menu" data-dropdown-menu hidden>
               <div class="dropdown__header">
-                <strong>John</strong>
+                <strong data-user-name>John</strong>
                 <span class="text-muted">Early access</span>
               </div>
               <a class="dropdown__item" href="#">Accounts and lists</a>

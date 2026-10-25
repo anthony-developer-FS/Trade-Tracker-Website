@@ -1,0 +1,8 @@
+# Local Supabase settings. Copy assets/js/config.example.js to create it.
+assets/js/config.js
+
+# Supabase CLI local state
+supabase/.branches
+supabase/.temp
+
+.DS_Store
