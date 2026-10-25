@@ -68,6 +68,9 @@
 
   <main id="main" class="container container--wide trade-log">
 
+    <!-- Page messages, e.g. "Trade saved" after Add trade redirects here. -->
+    <div class="alert alert--success" role="status" data-page-alert hidden></div>
+
     <div class="trade-log__heading">
       <div class="page-heading">
         <h1 class="page-heading__title">Trade log</h1>
@@ -88,11 +91,11 @@
     <!-- Market tabs: each one reloads the log for that market. -->
     <nav aria-label="Markets">
       <ul class="tabs">
-        <li><a class="tabs__item" href="trades.html" aria-current="page">All markets <span class="tabs__count">144</span></a></li>
-        <li><a class="tabs__item" href="trades.html?market=stock">Stocks <span class="tabs__count">52</span></a></li>
-        <li><a class="tabs__item" href="trades.html?market=option">Options <span class="tabs__count">49</span></a></li>
-        <li><a class="tabs__item" href="trades.html?market=future">Futures <span class="tabs__count">28</span></a></li>
-        <li><a class="tabs__item" href="trades.html?market=crypto">Crypto <span class="tabs__count">15</span></a></li>
+        <li><a class="tabs__item" href="trades.html" data-market-tab="all" aria-current="page">All markets <span class="tabs__count" data-market-count>144</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=stock" data-market-tab="stock">Stocks <span class="tabs__count" data-market-count>52</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=option" data-market-tab="option">Options <span class="tabs__count" data-market-count>49</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=future" data-market-tab="future">Futures <span class="tabs__count" data-market-count>28</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=crypto" data-market-tab="crypto">Crypto <span class="tabs__count" data-market-count>15</span></a></li>
       </ul>
     </nav>
 
@@ -180,7 +183,7 @@
           <thead>
             <tr>
               <th class="is-check" scope="col"><input type="checkbox" data-select-all aria-label="Select all trades on this page"></th>
-              <th scope="col" aria-sort="descending"><button class="sort-btn" type="button" data-sort="closed_at">Date <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
+              <th scope="col" aria-sort="descending"><button class="sort-btn" type="button" data-sort="trade_date">Date <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
               <th scope="col"><button class="sort-btn" type="button" data-sort="symbol">Symbol <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
               <th scope="col">Side</th>
               <th class="is-numeric" scope="col">Size</th>
@@ -382,18 +385,18 @@
         </div>
       </div>
 
-      <nav class="pagination" aria-label="Trade pages">
-        <span>Showing <strong>1–25</strong> of <strong>144</strong> trades</span>
-        <ul class="pagination__pages">
-          <li><a class="pagination__page" href="#" aria-label="Previous page" aria-disabled="true">
+      <nav class="pagination" aria-label="Trade pages" data-pagination>
+        <span data-page-summary>Showing <strong>1–25</strong> of <strong>144</strong> trades</span>
+        <ul class="pagination__pages" data-page-list>
+          <li><a class="pagination__page" href="#" data-page="prev" aria-label="Previous page" aria-disabled="true">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a></li>
-          <li><a class="pagination__page" href="#" aria-current="page">1</a></li>
-          <li><a class="pagination__page" href="#">2</a></li>
-          <li><a class="pagination__page" href="#">3</a></li>
+          <li><a class="pagination__page" href="#" data-page="1" aria-current="page">1</a></li>
+          <li><a class="pagination__page" href="#" data-page="2">2</a></li>
+          <li><a class="pagination__page" href="#" data-page="3">3</a></li>
           <li><span class="pagination__page" aria-hidden="true">…</span></li>
-          <li><a class="pagination__page" href="#">6</a></li>
-          <li><a class="pagination__page" href="#" aria-label="Next page">
+          <li><a class="pagination__page" href="#" data-page="6">6</a></li>
+          <li><a class="pagination__page" href="#" data-page="next" aria-label="Next page">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a></li>
         </ul>

@@ -72,10 +72,10 @@
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ol>
           <li><a href="trades.html">Trades</a></li>
-          <li aria-current="page">Add trade</li>
+          <li aria-current="page" data-form-crumb>Add trade</li>
         </ol>
       </nav>
-      <h1 class="page-heading__title">Add a trade</h1>
+      <h1 class="page-heading__title" data-form-title>Add a trade</h1>
       <p class="page-heading__lead">Enter each fill. Add more fills to scale in or out, and leave out the exit for a trade that's still open.</p>
     </div>
 
@@ -86,6 +86,9 @@
     -->
     <form class="trade-form" id="trade-form" novalidate>
       <div class="trade-form__main">
+
+        <!-- Shown when saving fails. Fill the text and remove hidden. -->
+        <div class="alert alert--error" role="alert" data-form-alert hidden></div>
 
         <!-- 1. Instrument -------------------------------------------------->
         <section class="card form-section" aria-labelledby="instrument-title">
@@ -397,7 +400,7 @@
                 <span class="chip">Followed plan<button class="chip__remove" type="button" aria-label="Remove tag Followed plan"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3L3 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></span>
                 <input class="chip-input__field" type="text" id="tag-input" placeholder="Add a tag and press Enter" autocomplete="off">
               </div>
-              <div class="chip-suggestions" aria-label="Suggested tags">
+              <div class="chip-suggestions" aria-label="Suggested tags" data-tag-suggestions>
                 <button class="chip-suggestion" type="button">+ Chased entry</button>
                 <button class="chip-suggestion" type="button">+ Moved stop</button>
                 <button class="chip-suggestion" type="button">+ Oversized</button>
@@ -407,7 +410,7 @@
 
             <fieldset class="fieldset">
               <legend>Lists</legend>
-              <div class="list-choices">
+              <div class="list-choices" data-list-choices>
                 <label class="choice">
                   <input type="checkbox" name="trade_list_ids[]" value="schwab-options">
                   <span class="color-dot" style="--dot-color: var(--color-primary)"></span>
@@ -421,7 +424,7 @@
                   <span class="choice__meta">83 trades</span>
                 </label>
               </div>
-              <p class="field__hint list-choices__hint">2 of 2 lists used. The trade always stays in your full trade log.</p>
+              <p class="field__hint list-choices__hint" data-list-usage>2 of 2 lists used. The trade always stays in your full trade log.</p>
             </fieldset>
           </div>
         </section>
