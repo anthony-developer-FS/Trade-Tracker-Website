@@ -96,3 +96,31 @@
   background: var(--color-warning-soft);
   color: var(--color-warning);
 }
+
+/* Alerts: inline messages above a form or section */
+.alert {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+}
+
+.alert--error {
+  border-color: var(--color-loss);
+  background: var(--color-loss-soft);
+  color: var(--color-loss);
+}
+
+.alert--success {
+  border-color: var(--color-gain);
+  background: var(--color-gain-soft);
+  color: var(--color-gain);
+}
+
+.alert--info {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+}

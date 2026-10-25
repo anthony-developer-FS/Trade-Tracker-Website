@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade log · TradeLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/themes/daylight.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/pages/trades.css">
+  <script src="../assets/js/global.js" defer></script>
+</head>
+<body class="page-app">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- App header ------------------------------------------------------------>
+  <header class="site-header" data-elevate-on-scroll>
+    <div class="container container--wide site-header__inner">
+      <a class="brand" href="../index.html" aria-label="TradeLab home">
+        <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="14" r="13" class="brand__mark-bg"></circle>
+          <path d="M8 18l4-5 3 3 5-7" class="brand__mark-line" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        TradeLab
+      </a>
+
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-controls="app-nav" aria-expanded="false" aria-label="Open menu">
+        <svg class="nav-toggle__open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="nav-toggle__close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <nav class="site-nav" id="app-nav" aria-label="Main">
+        <ul class="site-nav__links">
+          <li><a class="site-nav__link" href="#">Dashboard</a></li>
+          <li><a class="site-nav__link" href="trades.html" aria-current="page">Trades</a></li>
+          <li><a class="site-nav__link" href="#">Reports</a></li>
+          <li><a class="site-nav__link" href="#">Journal</a></li>
+          <li><a class="site-nav__link" href="#">Import</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--primary" href="add-trade.html">Add trade</a>
+          <div class="dropdown" data-dropdown>
+            <button class="avatar-btn" type="button" data-dropdown-trigger aria-expanded="false" aria-controls="account-menu" aria-label="Account menu">JM</button>
+            <div class="dropdown__menu" id="account-menu" data-dropdown-menu hidden>
+              <div class="dropdown__header">
+                <strong>John</strong>
+                <span class="text-muted">Early access</span>
+              </div>
+              <a class="dropdown__item" href="#">Accounts and lists</a>
+              <a class="dropdown__item" href="#">Settings</a>
+              <a class="dropdown__item" href="#">Help</a>
+              <button class="dropdown__item" type="button" data-action="sign-out">Log out</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container container--wide trade-log">
+
+    <div class="trade-log__heading">
+      <div class="page-heading">
+        <h1 class="page-heading__title">Trade log</h1>
+        <p class="page-heading__lead">Every trade across your accounts. Filter by market, list or setup to compare.</p>
+      </div>
+      <div class="trade-log__actions">
+        <a class="btn btn--secondary" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M4 15v5h16v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Import
+        </a>
+        <a class="btn btn--primary" href="add-trade.html">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Add trade
+        </a>
+      </div>
+    </div>
+
+    <!-- Market tabs: each one reloads the log for that market. -->
+    <nav aria-label="Markets">
+      <ul class="tabs">
+        <li><a class="tabs__item" href="trades.html" aria-current="page">All markets <span class="tabs__count">144</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=stock">Stocks <span class="tabs__count">52</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=option">Options <span class="tabs__count">49</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=future">Futures <span class="tabs__count">28</span></a></li>
+        <li><a class="tabs__item" href="trades.html?market=crypto">Crypto <span class="tabs__count">15</span></a></li>
+      </ul>
+    </nav>
+
+    <!-- Filters. Names match the analytics function parameters where they overlap. -->
+    <form class="card filters" id="trade-filters" role="search" aria-label="Filter trades">
+      <div class="field filters__search">
+        <label class="field__label" for="filter-search">Search</label>
+        <div class="input-icon">
+          <svg class="input-icon__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input class="input" type="search" id="filter-search" name="q" placeholder="Symbol, setup or tag">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="filter-list">List</label>
+        <select class="select" id="filter-list" name="trade_list_id">
+          <option value="">All trades</option>
+          <option value="schwab-options">Schwab options</option>
+          <option value="fidelity-stocks">Fidelity stocks</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="filter-account">Account</label>
+        <select class="select" id="filter-account" name="broker_account_id">
+          <option value="">All accounts</option>
+          <option value="schwab-ira">Charles Schwab · IRA</option>
+          <option value="fidelity-brokerage">Fidelity · Brokerage</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="filter-setup">Setup</label>
+        <select class="select" id="filter-setup" name="setup_id">
+          <option value="">Any setup</option>
+          <option value="breakout">Breakout</option>
+          <option value="vwap-fade">VWAP fade</option>
+          <option value="opening-range">Opening range</option>
+          <option value="earnings-drift">Earnings drift</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="filter-status">Status</label>
+        <select class="select" id="filter-status" name="status">
+          <option value="">Open and closed</option>
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="filter-from">From</label>
+        <input class="input" type="date" id="filter-from" name="from" value="2026-10-01">
+      </div>
+      <div class="field">
+        <label class="field__label" for="filter-to">To</label>
+        <input class="input" type="date" id="filter-to" name="to" value="2026-10-31">
+      </div>
+      <div class="filters__actions">
+        <button class="btn btn--ghost" type="reset">Clear</button>
+        <button class="btn btn--dark" type="submit">Apply</button>
+      </div>
+    </form>
+
+    <!-- Totals for the current filters (from get_trade_stats). -->
+    <dl class="totals" aria-label="Totals for these filters">
+      <div class="totals__item"><dt>Trades</dt><dd data-total="trade-count">144</dd></div>
+      <div class="totals__item"><dt>Net P&amp;L</dt><dd class="text-gain" data-total="net-pnl">+$12,480.50</dd></div>
+      <div class="totals__item"><dt>Win rate</dt><dd data-total="win-rate">58.3%</dd></div>
+      <div class="totals__item"><dt>Profit factor</dt><dd data-total="profit-factor">1.92</dd></div>
+      <div class="totals__item"><dt>Fees</dt><dd data-total="fees">$1,184.00</dd></div>
+    </dl>
+
+    <section class="card card--flush trade-table" aria-labelledby="trade-table-title">
+      <h2 class="visually-hidden" id="trade-table-title">Trades</h2>
+
+      <!-- Shown by the page script while one or more rows are selected. -->
+      <div class="bulk-bar" data-bulk-bar hidden>
+        <span class="bulk-bar__count"><strong data-selected-count>2</strong> selected</span>
+        <div class="bulk-bar__actions">
+          <button class="btn btn--secondary btn--sm" type="button" data-action="add-to-list">Add to list</button>
+          <button class="btn btn--secondary btn--sm" type="button" data-action="add-tag">Add tag</button>
+          <button class="btn btn--danger btn--sm" type="button" data-action="delete-trades">Delete</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table data-table--stack">
+          <thead>
+            <tr>
+              <th class="is-check" scope="col"><input type="checkbox" data-select-all aria-label="Select all trades on this page"></th>
+              <th scope="col" aria-sort="descending"><button class="sort-btn" type="button" data-sort="closed_at">Date <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
+              <th scope="col"><button class="sort-btn" type="button" data-sort="symbol">Symbol <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
+              <th scope="col">Side</th>
+              <th class="is-numeric" scope="col">Size</th>
+              <th class="is-numeric" scope="col">Entry</th>
+              <th class="is-numeric" scope="col">Exit</th>
+              <th class="is-numeric" scope="col" aria-sort="none"><button class="sort-btn" type="button" data-sort="net_pnl">Net P&amp;L <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
+              <th class="is-numeric" scope="col" aria-sort="none"><button class="sort-btn" type="button" data-sort="r_multiple">R <svg class="sort-btn__icon" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></th>
+              <th scope="col">Setup</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <!-- Sample rows for layout. The page script replaces them with rows built from #trade-row-template. -->
+          <tbody data-trade-rows>
+              <tr data-trade-id="sample-1">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-1" aria-label="Select ES Dec 26 trade, Oct 23"></td>
+                <td data-label="Date"><time datetime="2026-10-23">Oct 23</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">ES Dec 26</a>
+                  <span class="trade-symbol__market">Futures</span>
+                </td>
+                <td data-label="Side"><span class="side side--short">Short</span></td>
+                <td class="is-numeric" data-label="Size">2</td>
+                <td class="is-numeric" data-label="Entry">5,912.25</td>
+                <td class="is-numeric" data-label="Exit">5,898.50</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-gain">+$1,375.00</span></td>
+                <td class="is-numeric" data-label="R">2.75R</td>
+                <td data-label="Setup">VWAP fade</td>
+                <td data-label="Tags"><span class="badge">Followed plan</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-2">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-2" aria-label="Select MSFT trade, Oct 23"></td>
+                <td data-label="Date"><time datetime="2026-10-23">Oct 23</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">MSFT</a>
+                  <span class="trade-symbol__market">Stocks</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">50</td>
+                <td class="is-numeric" data-label="Entry">418.30</td>
+                <td class="is-numeric" data-label="Exit"><span class="text-muted">—</span></td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-muted">—</span></td>
+                <td class="is-numeric" data-label="R"><span class="text-muted">—</span></td>
+                <td data-label="Setup">Breakout</td>
+                <td data-label="Tags"><span class="text-muted">—</span></td>
+                <td data-label="Status"><span class="badge badge--primary">Open</span></td>
+              </tr>
+              <tr data-trade-id="sample-3">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-3" aria-label="Select BTC-USD trade, Oct 22"></td>
+                <td data-label="Date"><time datetime="2026-10-22">Oct 22</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">BTC-USD</a>
+                  <span class="trade-symbol__market">Crypto</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">0.5</td>
+                <td class="is-numeric" data-label="Entry">68,420.00</td>
+                <td class="is-numeric" data-label="Exit">69,980.00</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-gain">+$780.00</span></td>
+                <td class="is-numeric" data-label="R">1.56R</td>
+                <td data-label="Setup">Breakout</td>
+                <td data-label="Tags"><span class="text-muted">—</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-4">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-4" aria-label="Select AAPL trade, Oct 22"></td>
+                <td data-label="Date"><time datetime="2026-10-22">Oct 22</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">AAPL</a>
+                  <span class="trade-symbol__market">Stocks</span>
+                </td>
+                <td data-label="Side"><span class="side side--short">Short</span></td>
+                <td class="is-numeric" data-label="Size">100</td>
+                <td class="is-numeric" data-label="Entry">229.40</td>
+                <td class="is-numeric" data-label="Exit">231.10</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-loss">-$170.00</span></td>
+                <td class="is-numeric" data-label="R">-0.85R</td>
+                <td data-label="Setup">Off-plan</td>
+                <td data-label="Tags"><span class="badge">Chased entry</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-5">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-5" aria-label="Select TSLA 260P Nov 20 trade, Oct 21"></td>
+                <td data-label="Date"><time datetime="2026-10-21">Oct 21</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">TSLA 260P Nov 20</a>
+                  <span class="trade-symbol__market">Options</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">3</td>
+                <td class="is-numeric" data-label="Entry">4.20</td>
+                <td class="is-numeric" data-label="Exit">6.05</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-gain">+$555.00</span></td>
+                <td class="is-numeric" data-label="R">1.85R</td>
+                <td data-label="Setup">Earnings drift</td>
+                <td data-label="Tags"><span class="text-muted">—</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-6">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-6" aria-label="Select SPY 580C Nov 15 trade, Oct 21"></td>
+                <td data-label="Date"><time datetime="2026-10-21">Oct 21</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">SPY 580C Nov 15</a>
+                  <span class="trade-symbol__market">Options</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">5</td>
+                <td class="is-numeric" data-label="Entry">2.10</td>
+                <td class="is-numeric" data-label="Exit">1.45</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-loss">-$325.00</span></td>
+                <td class="is-numeric" data-label="R">-1.30R</td>
+                <td data-label="Setup">Opening range</td>
+                <td data-label="Tags"><span class="badge">Moved stop</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-7">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-7" aria-label="Select NVDA trade, Oct 20"></td>
+                <td data-label="Date"><time datetime="2026-10-20">Oct 20</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">NVDA</a>
+                  <span class="trade-symbol__market">Stocks</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">200</td>
+                <td class="is-numeric" data-label="Entry">138.20</td>
+                <td class="is-numeric" data-label="Exit">141.85</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-gain">+$730.00</span></td>
+                <td class="is-numeric" data-label="R">1.46R</td>
+                <td data-label="Setup">Breakout</td>
+                <td data-label="Tags"><span class="badge">Followed plan</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-8">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-8" aria-label="Select NQ Dec 26 trade, Oct 20"></td>
+                <td data-label="Date"><time datetime="2026-10-20">Oct 20</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">NQ Dec 26</a>
+                  <span class="trade-symbol__market">Futures</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">1</td>
+                <td class="is-numeric" data-label="Entry">20,915.50</td>
+                <td class="is-numeric" data-label="Exit">20,890.25</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-loss">-$505.00</span></td>
+                <td class="is-numeric" data-label="R">-1.01R</td>
+                <td data-label="Setup">Opening range</td>
+                <td data-label="Tags"><span class="badge">Oversized</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-9">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-9" aria-label="Select ETH-USD trade, Oct 19"></td>
+                <td data-label="Date"><time datetime="2026-10-19">Oct 19</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">ETH-USD</a>
+                  <span class="trade-symbol__market">Crypto</span>
+                </td>
+                <td data-label="Side"><span class="side side--short">Short</span></td>
+                <td class="is-numeric" data-label="Size">2</td>
+                <td class="is-numeric" data-label="Entry">2,640.00</td>
+                <td class="is-numeric" data-label="Exit">2,598.40</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-gain">+$83.20</span></td>
+                <td class="is-numeric" data-label="R"><span class="text-muted">—</span></td>
+                <td data-label="Setup"><span class="text-muted">—</span></td>
+                <td data-label="Tags"><span class="text-muted">—</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+              <tr data-trade-id="sample-10">
+                <td class="is-check"><input type="checkbox" name="trade_ids[]" value="sample-10" aria-label="Select AMD 160C Nov 20 trade, Oct 19"></td>
+                <td data-label="Date"><time datetime="2026-10-19">Oct 19</time></td>
+                <td class="is-wide" data-label="Symbol">
+                  <a class="trade-symbol" href="#">AMD 160C Nov 20</a>
+                  <span class="trade-symbol__market">Options</span>
+                </td>
+                <td data-label="Side"><span class="side side--long">Long</span></td>
+                <td class="is-numeric" data-label="Size">4</td>
+                <td class="is-numeric" data-label="Entry">3.80</td>
+                <td class="is-numeric" data-label="Exit">5.10</td>
+                <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span class="text-gain">+$520.00</span></td>
+                <td class="is-numeric" data-label="R">2.08R</td>
+                <td data-label="Setup">Breakout</td>
+                <td data-label="Tags"><span class="text-muted">—</span></td>
+                <td data-label="Status"><span class="badge">Closed</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Shown instead of the table when there are no trades (or none match the filters). -->
+      <div class="empty-state" data-empty-state hidden>
+        <span class="empty-state__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <h3 class="empty-state__title">No trades yet</h3>
+        <p class="empty-state__text">Import a file from your broker or add your first trade by hand. Your stats fill in as soon as you do.</p>
+        <div class="empty-state__actions">
+          <a class="btn btn--secondary" href="#">Import trades</a>
+          <a class="btn btn--primary" href="add-trade.html">Add a trade</a>
+        </div>
+      </div>
+
+      <nav class="pagination" aria-label="Trade pages">
+        <span>Showing <strong>1–25</strong> of <strong>144</strong> trades</span>
+        <ul class="pagination__pages">
+          <li><a class="pagination__page" href="#" aria-label="Previous page" aria-disabled="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+          <li><a class="pagination__page" href="#" aria-current="page">1</a></li>
+          <li><a class="pagination__page" href="#">2</a></li>
+          <li><a class="pagination__page" href="#">3</a></li>
+          <li><span class="pagination__page" aria-hidden="true">…</span></li>
+          <li><a class="pagination__page" href="#">6</a></li>
+          <li><a class="pagination__page" href="#" aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+        </ul>
+        <label class="pagination__size">
+          Rows
+          <select class="select" name="page_size">
+            <option>25</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </label>
+      </nav>
+    </section>
+
+    <!-- One row of the table. Fill the [data-field] slots and set the classes noted. -->
+    <template id="trade-row-template">
+      <tr data-trade-id="">
+        <td class="is-check"><input type="checkbox" name="trade_ids[]" value="" aria-label=""></td>
+        <td data-label="Date"><time data-field="date" datetime=""></time></td>
+        <td class="is-wide" data-label="Symbol">
+          <a class="trade-symbol" href="#" data-field="symbol"></a>
+          <span class="trade-symbol__market" data-field="market"></span>
+        </td>
+        <td data-label="Side"><span class="side" data-field="direction"></span><!-- add side--long or side--short --></td>
+        <td class="is-numeric" data-label="Size" data-field="quantity"></td>
+        <td class="is-numeric" data-label="Entry" data-field="avg_entry_price"></td>
+        <td class="is-numeric" data-label="Exit" data-field="avg_exit_price"></td>
+        <td class="is-numeric trade-pnl" data-label="Net P&amp;L"><span data-field="net_pnl"></span><!-- add text-gain or text-loss --></td>
+        <td class="is-numeric" data-label="R" data-field="r_multiple"></td>
+        <td data-label="Setup" data-field="setup"></td>
+        <td data-label="Tags" data-field="tags"></td>
+        <td data-label="Status"><span class="badge" data-field="status"></span><!-- add badge--primary when open --></td>
+      </tr>
+    </template>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container container--wide site-footer__inner">
+      <span>&copy; <span data-current-year>2026</span> TradeLab</span>
+      <ul class="site-footer__links">
+        <li><a href="../privacy.html">Privacy policy</a></li>
+        <li><a href="../terms.html">Terms of service</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

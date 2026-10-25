@@ -1,0 +1,56 @@
+/* =============================================================================
+   Tabs: a row of links or buttons with an underline on the current one.
+   Mark the current tab with aria-current="page" (links) or
+   aria-selected="true" (buttons in a tablist).
+   ============================================================================= */
+
+.tabs {
+  display: flex;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--color-border);
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  padding: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tabs__item:hover {
+  color: var(--color-text);
+}
+
+.tabs__item[aria-current="page"],
+.tabs__item[aria-selected="true"] {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+.tabs__count {
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+}

@@ -6,7 +6,13 @@ A trade journal that helps traders track, analyze and improve their performance 
 
 ```
 index.html                    Landing page
+login.html                    Log in
+signup.html                   Create account
+forgot-password.html          Password reset request
+privacy.html, terms.html      Legal pages
+contact.html                  Contact form
 app/
+  trades.html                 Trade log (filters, market tabs, table)
   add-trade.html              Manual trade entry
 assets/
   css/
@@ -14,11 +20,11 @@ assets/
       daylight.css            Active theme
       terminal.css …          Alternate looks from the mockups
     base.css                  Reset, element defaults, layout primitives, utilities
-    components/               Reusable UI: buttons, forms, cards, navigation, layout
+    components/               Reusable UI: buttons, forms, cards, navigation, layout, tabs, table
     main.css                  Imports base + all components
     pages/                    One stylesheet per page
   js/
-    global.js                 Menus, dropdowns, mobile nav (every page)
+    global.js                 Menus, dropdowns, mobile nav, password toggles (every page)
     pages/                    One script per page (to come)
 design/mockups/               The five design directions
 docs/database/                Database schema docs

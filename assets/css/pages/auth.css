@@ -1,0 +1,284 @@
+/* =============================================================================
+   Auth pages (login.html, signup.html, forgot-password.html)
+   Form on the left, a brand panel on the right that hides on small screens.
+   ============================================================================= */
+
+.page-auth {
+  background: var(--color-surface);
+}
+
+.auth {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.page-auth--simple .auth {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 960px) {
+  .auth {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth__aside {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Form panel
+   --------------------------------------------------------------------------- */
+
+.auth__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  padding: var(--space-6) var(--container-gutter);
+}
+
+.auth__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.auth__back {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.auth__back:hover {
+  color: var(--color-text);
+}
+
+.auth__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.auth__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.auth__title {
+  font-size: var(--text-3xl);
+}
+
+.auth__lead {
+  color: var(--color-text-muted);
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.auth__label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.auth__link {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+.auth__link:hover {
+  text-decoration: underline;
+}
+
+.auth__check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.auth__check input {
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  flex: none;
+  accent-color: var(--color-primary);
+}
+
+.auth__switch {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.auth__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-sunken);
+  text-align: center;
+}
+
+.auth__success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.auth__success-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.auth__success-title {
+  font-size: var(--text-xl);
+}
+
+.auth__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.auth__footer a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.auth__footer a:hover {
+  color: var(--color-text);
+}
+
+/* ---------------------------------------------------------------------------
+   Brand panel
+   --------------------------------------------------------------------------- */
+
+.auth__aside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.auth__aside-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 460px;
+}
+
+.auth__aside-title {
+  font-size: clamp(var(--text-2xl), 3vw, 2.25rem);
+  font-weight: var(--font-weight-heavy);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.15;
+}
+
+.auth__points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.5;
+}
+
+.auth__points li {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.auth__points li::before {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-on-primary);
+}
+
+/* Check mark drawn with borders so it follows the theme colors. */
+.auth__points li::after {
+  content: "";
+  position: absolute;
+  top: calc(0.15em + 5px);
+  left: 7px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--color-primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.auth__preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth__preview-label {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.auth__preview-value {
+  color: var(--color-gain);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-heavy);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.auth__preview svg {
+  width: 100%;
+  height: 90px;
+  margin-top: var(--space-2);
+}
+
+.auth__preview-line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}

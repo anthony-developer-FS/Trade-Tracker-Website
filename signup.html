@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create your account · TradeLab</title>
+  <meta name="description" content="Create a free TradeLab account and start journaling your trades.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/themes/daylight.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages/auth.css">
+  <script src="assets/js/global.js" defer></script>
+</head>
+<body class="page-auth">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="auth">
+    <div class="auth__panel">
+      <header class="auth__header">
+        <a class="brand" href="index.html" aria-label="TradeLab home">
+          <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="13" class="brand__mark-bg"></circle>
+            <path d="M8 18l4-5 3 3 5-7" class="brand__mark-line" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          TradeLab
+        </a>
+        <a class="auth__back" href="index.html">Back to home</a>
+      </header>
+
+      <main id="main" class="auth__main">
+        <div class="auth__intro">
+          <span class="badge badge--primary">Free during early access</span>
+          <h1 class="auth__title">Create your account</h1>
+          <p class="auth__lead">Start journaling in under a minute. No card needed.</p>
+        </div>
+
+        <!--
+          Not connected to Supabase Auth yet. When it is:
+          supabase.auth.signUp({ email, password, options: { data: { full_name } } })
+          full_name is copied into profiles.display_name by the database.
+          After sign-up, hide the form and show #signup-success.
+        -->
+        <form class="auth__form" id="signup-form" novalidate>
+          <div class="alert alert--error" id="signup-error" role="alert" hidden>
+            An account with that email already exists. Try logging in instead.
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="signup-name">Name</label>
+            <input class="input" type="text" id="signup-name" name="full_name" autocomplete="name" required aria-describedby="signup-name-error">
+            <p class="field__error" id="signup-name-error" hidden>Enter your name.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="signup-email">Email</label>
+            <input class="input" type="email" id="signup-email" name="email" autocomplete="email" inputmode="email" required aria-describedby="signup-email-error">
+            <p class="field__error" id="signup-email-error" hidden>Enter a valid email address.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="signup-password">Password</label>
+            <div class="password-field">
+              <input class="input" type="password" id="signup-password" name="password" autocomplete="new-password" minlength="8" required aria-describedby="signup-password-hint signup-password-error">
+              <button class="password-field__toggle" type="button" data-password-toggle aria-controls="signup-password" aria-pressed="false">Show</button>
+            </div>
+            <p class="field__hint" id="signup-password-hint">At least 8 characters.</p>
+            <p class="field__error" id="signup-password-error" hidden>Use at least 8 characters.</p>
+          </div>
+
+          <label class="auth__check">
+            <input type="checkbox" name="accept_terms" required>
+            <span>I agree to the <a class="auth__link" href="terms.html">Terms of service</a> and <a class="auth__link" href="privacy.html">Privacy policy</a>.</span>
+          </label>
+
+          <button class="btn btn--primary btn--lg btn--block" type="submit">Create account</button>
+        </form>
+
+        <div class="auth__success" id="signup-success" role="status" hidden>
+          <span class="auth__success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 7l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </span>
+          <h2 class="auth__success-title">Check your email</h2>
+          <p class="auth__lead">We sent a confirmation link to <strong data-signup-email>you@example.com</strong>. Open it to finish setting up your account.</p>
+        </div>
+
+        <p class="auth__switch">Already have an account? <a class="auth__link" href="login.html">Log in</a></p>
+      </main>
+
+      <footer class="auth__footer">
+        <span>&copy; <span data-current-year>2026</span> TradeLab</span>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+      </footer>
+    </div>
+
+    <aside class="auth__aside" aria-label="What you get">
+      <div class="auth__aside-inner">
+        <p class="auth__aside-title">See what's really driving your P&amp;L.</p>
+        <ul class="auth__points">
+          <li>Import trades from your broker or add them by hand, fill by fill.</li>
+          <li>Win rate, profit factor and expectancy by setup, tag, weekday and hour.</li>
+          <li>Up to two named lists to track accounts or strategies separately.</li>
+        </ul>
+        <figure class="auth__preview" aria-label="Sample equity curve">
+          <span class="auth__preview-label">Net P&amp;L · sample account</span>
+          <span class="auth__preview-value">+$12,480.50</span>
+          <svg viewBox="0 0 400 110" preserveAspectRatio="none" aria-hidden="true">
+            <path class="auth__preview-line" d="M0 104 L30 95 L55 99 L85 82 L110 76 L135 86 L165 66 L195 58 L220 63 L250 46 L280 36 L300 41 L330 25 L360 20 L380 16 L400 6" vector-effect="non-scaling-stroke"/>
+          </svg>
+        </figure>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

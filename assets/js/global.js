@@ -11,6 +11,7 @@
  *   [data-dropdown]            wrapper with [data-dropdown-trigger] and
  *                              [data-dropdown-menu] inside
  *   [data-elevate-on-scroll]   header that gets .is-scrolled after scrolling
+ *   [data-password-toggle]     Show/Hide button for the input in aria-controls
  *   [data-current-year]        element whose text becomes the current year
  */
 (function () {
@@ -187,11 +188,28 @@
     });
   }
 
+  // Show/Hide button on password inputs ([data-password-toggle] with
+  // aria-controls pointing at the input).
+  function initPasswordToggles() {
+    document.querySelectorAll('[data-password-toggle]').forEach(function (button) {
+      var input = document.getElementById(button.getAttribute('aria-controls'));
+      if (!input) return;
+
+      button.addEventListener('click', function () {
+        var show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        button.setAttribute('aria-pressed', String(show));
+        button.textContent = show ? 'Hide' : 'Show';
+      });
+    });
+  }
+
   function init() {
     initNavToggles();
     initDropdowns();
     initEscapeKey();
     initHeaderElevation();
+    initPasswordToggles();
     initCurrentYear();
   }
 

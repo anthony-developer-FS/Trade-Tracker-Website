@@ -33,7 +33,7 @@
       <nav class="site-nav" id="app-nav" aria-label="Main">
         <ul class="site-nav__links">
           <li><a class="site-nav__link" href="#">Dashboard</a></li>
-          <li><a class="site-nav__link" href="#" aria-current="page">Trades</a></li>
+          <li><a class="site-nav__link" href="trades.html" aria-current="page">Trades</a></li>
           <li><a class="site-nav__link" href="#">Reports</a></li>
           <li><a class="site-nav__link" href="#">Journal</a></li>
           <li><a class="site-nav__link" href="#">Import</a></li>
@@ -63,7 +63,7 @@
     <div class="page-heading">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ol>
-          <li><a href="#">Trades</a></li>
+          <li><a href="trades.html">Trades</a></li>
           <li aria-current="page">Add trade</li>
         </ol>
       </nav>
@@ -473,11 +473,21 @@
           <div class="summary__actions">
             <button class="btn btn--primary btn--lg btn--block" type="submit">Save trade</button>
             <button class="btn btn--secondary btn--block" type="submit" name="intent" value="save-and-new">Save and add another</button>
-            <a class="btn btn--ghost btn--block" href="#">Cancel</a>
+            <a class="btn btn--ghost btn--block" href="trades.html">Cancel</a>
           </div>
         </div>
       </aside>
     </form>
   </main>
+  <footer class="site-footer">
+    <div class="container container--wide site-footer__inner">
+      <span>&copy; <span data-current-year>2026</span> TradeLab</span>
+      <ul class="site-footer__links">
+        <li><a href="../privacy.html">Privacy policy</a></li>
+        <li><a href="../terms.html">Terms of service</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>
