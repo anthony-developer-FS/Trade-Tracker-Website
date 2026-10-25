@@ -10,6 +10,7 @@ favicon.ico                   Browser tab icon (fallback for older browsers)
 login.html                    Log in
 signup.html                   Create account
 forgot-password.html          Password reset request
+reset-password.html           Choose a new password (opened from the reset email)
 privacy.html, terms.html      Legal pages
 contact.html                  Contact form
 app/
@@ -26,8 +27,12 @@ assets/
     pages/                    One stylesheet per page
   js/
     global.js                 Night mode, menus, dropdowns, mobile nav, password toggles (every page)
+    config.example.js         Supabase URL and anon key template (copy to config.js, which is gitignored)
+    lib/
+      supabase.js             The shared Supabase client (TradeLab.supabase)
+      auth.js                 Page guard, log out, account menu, auth form helpers (TradeLab.auth)
+    pages/                    One script per page (login, signup, forgot-password, reset-password)
   img/                        Favicon (SVG) and Apple touch icon
-    pages/                    One script per page (to come)
 design/mockups/               The five design directions
 docs/database/                Database schema docs
 docs/features/                Feature specs and build order (start with mvp-trade-pages.md)
@@ -49,9 +54,19 @@ supabase/                     Migrations and tests
 It's plain HTML, CSS and JS, so any static server works:
 
 ```sh
+cp assets/js/config.example.js assets/js/config.js   # then add your Supabase URL and anon key
 python3 -m http.server 8000
 # open http://localhost:8000
 ```
+
+Add `http://localhost:8000/**` to the Redirect URLs in Supabase (Authentication > URL Configuration) so the confirmation and password reset links work locally.
+
+## Auth
+
+- Pages that need a signed-in user put `data-auth="required"` on `<body>` and load the Supabase scripts (see `app/trades.html`). Anyone signed out is sent to `login.html?next=<page>` and comes back after logging in.
+- `[data-action="sign-out"]` logs out from any page. `[data-user-name]` and `[data-user-initials]` are filled in with the signed-in user.
+- Page scripts get the client from `TradeLab.supabase` and wait for the user with `TradeLab.auth.ready.then(user => ...)`.
+- Only the anon (publishable) key belongs in `config.js`. Row level security protects the data. Never put the service role key in the front end.
 
 ## Database
 

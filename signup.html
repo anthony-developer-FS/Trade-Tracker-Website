@@ -14,8 +14,13 @@
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/pages/auth.css">
   <script src="assets/js/global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/lib/supabase.js" defer></script>
+  <script src="assets/js/lib/auth.js" defer></script>
+  <script src="assets/js/pages/signup.js" defer></script>
 </head>
-<body class="page-auth">
+<body class="page-auth" data-auth="guest">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="auth">
@@ -45,10 +50,8 @@
         </div>
 
         <!--
-          Not connected to Supabase Auth yet. When it is:
-          supabase.auth.signUp({ email, password, options: { data: { full_name } } })
+          Wired to Supabase Auth in assets/js/pages/signup.js.
           full_name is copied into profiles.display_name by the database.
-          After sign-up, hide the form and show #signup-success.
         -->
         <form class="auth__form" id="signup-form" novalidate>
           <div class="alert alert--error" id="signup-error" role="alert" hidden>
