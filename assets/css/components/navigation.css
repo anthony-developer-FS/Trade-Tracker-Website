@@ -6,6 +6,7 @@
      [data-nav-toggle]        opens/closes the nav it points to (aria-controls)
      [data-dropdown]          wraps a [data-dropdown-trigger] + [data-dropdown-menu]
      [data-elevate-on-scroll] header gets .is-scrolled once the page scrolls
+     [data-theme-toggle]      switches night mode on and off
    ============================================================================= */
 
 /* ---------------------------------------------------------------------------
@@ -134,6 +135,32 @@
 
 .nav-toggle[aria-expanded="true"] .nav-toggle__close {
   display: block;
+}
+
+/* Night mode toggle. In the markup it sits before the menu button; on
+   desktop it moves after the nav, on mobile it stays left of the menu button. */
+.theme-toggle {
+  order: 1;
+}
+
+.theme-toggle__sun,
+:root[data-theme="dark"] .theme-toggle__moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle__sun {
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .site-header .theme-toggle {
+    order: 0;
+    margin-left: auto;
+  }
+
+  .theme-toggle + .nav-toggle {
+    margin-left: calc(var(--space-2) - var(--space-6));
+  }
 }
 
 /* Mobile: the nav collapses behind the toggle and opens as a full panel. */

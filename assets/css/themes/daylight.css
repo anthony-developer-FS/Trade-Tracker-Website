@@ -5,11 +5,17 @@
    stylesheet reads these variables and never hard-codes colors, fonts or radii,
    so switching the look of the whole site means linking a different theme
    file. Other themes live next to this one and use the same variable names.
+
+   Night mode overrides the color tokens under [data-theme="dark"] on <html>.
+   global.js sets that attribute from the visitor's saved choice or, if there
+   is none, their system setting.
    ============================================================================= */
 
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
 
 :root {
+  color-scheme: light;
+
   /* Surfaces */
   --color-page: #F4F5F7;
   --color-surface: #FFFFFF;
@@ -89,4 +95,48 @@
   --header-height: 68px;
   --control-height: 44px;
   --transition-fast: 150ms ease;
+}
+
+/* -----------------------------------------------------------------------------
+   Night mode: colors and shadows only. Everything else is inherited from above.
+   In the dark, brand buttons use dark text on a lighter indigo so both the
+   buttons and indigo links stay readable.
+   ----------------------------------------------------------------------------- */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --color-page: #0B1020;
+  --color-surface: #131A2A;
+  --color-surface-muted: #1B2335;
+  --color-surface-sunken: #0F1524;
+  --color-border: #252E43;
+  --color-border-strong: #343F58;
+  --color-overlay: rgba(3, 6, 14, 0.7);
+
+  /* Text */
+  --color-text: #E8ECF4;
+  --color-text-secondary: #B6C0D2;
+  --color-text-muted: #8D97AB;
+  --color-text-inverse: #0B1020;
+
+  /* Brand */
+  --color-primary: #8584F8;
+  --color-primary-hover: #A5A4FF;
+  --color-primary-soft: #23244D;
+  --color-on-primary: #0B1020;
+  --color-focus: #A5A4FF;
+
+  /* Trading semantics */
+  --color-gain: #34D399;
+  --color-gain-soft: #10291F;
+  --color-loss: #FB923C;
+  --color-loss-soft: #33200F;
+  --color-warning: #F5C451;
+  --color-warning-soft: #2E260E;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.55);
 }

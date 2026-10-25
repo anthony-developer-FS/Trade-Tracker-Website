@@ -5,7 +5,8 @@ A trade journal that helps traders track, analyze and improve their performance 
 ## Project structure
 
 ```
-index.html                    Landing page
+index.html                    Landing page (always light)
+favicon.ico                   Browser tab icon (fallback for older browsers)
 login.html                    Log in
 signup.html                   Create account
 forgot-password.html          Password reset request
@@ -17,14 +18,15 @@ app/
 assets/
   css/
     themes/                   Design tokens only (colors, fonts, radii, spacing)
-      daylight.css            Active theme
+      daylight.css            Active theme, with night mode colors
       terminal.css …          Alternate looks from the mockups
     base.css                  Reset, element defaults, layout primitives, utilities
     components/               Reusable UI: buttons, forms, cards, navigation, layout, tabs, table
     main.css                  Imports base + all components
     pages/                    One stylesheet per page
   js/
-    global.js                 Menus, dropdowns, mobile nav, password toggles (every page)
+    global.js                 Night mode, menus, dropdowns, mobile nav, password toggles (every page)
+  img/                        Favicon (SVG) and Apple touch icon
     pages/                    One script per page (to come)
 design/mockups/               The five design directions
 docs/database/                Database schema docs
@@ -37,6 +39,7 @@ supabase/                     Migrations and tests
 - **Class names follow BEM:** `block`, `block__element`, `block--modifier` (e.g. `card__title`, `btn--primary`).
 - **Each page links three stylesheets in this order:** theme, `main.css`, then its own page file.
 - **JavaScript hooks use `data-*` attributes**, not classes (e.g. `data-nav-toggle`, `data-action="add-fill"`). Classes are for styling only, so a redesign can't break behavior.
+- **Night mode** is `<html data-theme="dark">`. The dark color tokens sit in the theme file under `:root[data-theme="dark"]`, so components need no dark-specific CSS. `global.js` applies the saved choice (or the system setting) and wires every `[data-theme-toggle]` button; it is loaded in `<head>` without `defer` so dark pages don't flash light. The landing page opts out with `data-theme-lock="light"`.
 - **`global.js` holds shared UI behavior only.** Page features go in `assets/js/pages/<page>.js`. Database calls go in their own module, not mixed into UI code.
 - **Form field names match database columns** (see `docs/database/README.md`), so wiring a form to Supabase is a direct mapping.
 
