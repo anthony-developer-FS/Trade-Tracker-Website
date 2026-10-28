@@ -13,10 +13,11 @@
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/pages/add-trade.css">
   <script src="../assets/js/global.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous" defer></script>
   <script src="../assets/js/config.js" defer></script>
   <script src="../assets/js/lib/supabase.js" defer></script>
   <script src="../assets/js/lib/auth.js" defer></script>
+  <script src="../assets/js/addTrade.js" defer></script>
 </head>
 <body class="page-app" data-auth="required">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -401,7 +402,7 @@
             <div class="field">
               <label class="field__label" for="tag-input">Tags</label>
               <div class="chip-input" data-chip-input>
-                <span class="chip">Followed plan<button class="chip__remove" type="button" aria-label="Remove tag Followed plan"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3L3 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></span>
+                <span class="chip" id="starter">Followed plan<button class="chip__remove" type="button" aria-label="Remove tag Followed plan"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3L3 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></span>
                 <input class="chip-input__field" type="text" id="tag-input" placeholder="Add a tag and press Enter" autocomplete="off">
               </div>
               <div class="chip-suggestions" aria-label="Suggested tags" data-tag-suggestions>
